@@ -28,7 +28,7 @@ void	reverse_b(t_node **b)
 	write(1, "rrb\n", 4);
 }
 
-void	ft_reverse_both(t_node **a, t_node **b)
+void	reverse_both(t_node **a, t_node **b)
 {
 	reverse(a);
 	reverse(b);

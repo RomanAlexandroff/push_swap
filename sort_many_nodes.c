@@ -1,21 +1,5 @@
 #include "push_swap.h"
 
-// static void	rotate_both(t_node **a, t_node **b, t_node *node)
-// {
-// 	while (*a != node->destination && *b != node)
-// 		ft_rotate_both(a, b);
-// 	ft_position_update(*a);
-// 	ft_position_update(*b);
-// }
-
-// static void	reverse_both(t_node **a, t_node **b, t_node *node)
-// {
-// 	while (*a != node->destination && *b != node)
-// 		ft_reverse_both(a, b);
-// 	ft_position_update(*a);
-// 	ft_position_update(*b);
-// }
-
 void	ensure_top(t_node **stack, t_node *node, char name)
 {
 	while (*stack != node)
@@ -61,13 +45,13 @@ static void	solve_node(t_node **a, t_node **b)
 	push_to_a(a, b);
 }
 
-// static void	ft_sort_five(t_node **a, t_node **b)
+// static void	sort_five(t_node **a, t_node **b)
 // {
-// 	while (ft_get_stack_length(*a) > 3)
+// 	while (get_stack_length(*a) > 3)
 // 	{
-// 		ft_update_nodes(*a, *b);
-// 		ft_ensure_top(a, ft_get_lowest_value(*a), 'a');
-// 		ft_push_to_b(a, b);
+// 		update_nodes(*a, *b);
+// 		ensure_top(a, ft_get_lowest_value(*a), 'a');
+// 		push_to_b(a, b);
 // 	}
 // }
 
@@ -79,7 +63,7 @@ void	sort_many(t_node **a, t_node **b)
 	length = 0;
     length = get_stack_length(*a);
 	// if (length == 5)
-	// 	ft_sort_five(a, b);						// TO:DO. выяснить нахрена это нужно отдельной функцией
+	// 	sort_five(a, b);						// TO:DO. выяснить нахрена это нужно отдельной функцией
 	// else
 	// {
 		while (length-- > 3)

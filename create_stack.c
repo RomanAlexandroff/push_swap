@@ -68,7 +68,7 @@ void	create_stack_safely(t_node **a, char **argv, int argc)
 		value = ft_atod(argv[i]);
 		if (value < INT_MIN || value > INT_MAX)
 			free_and_exit(a, argv, argc);
-		if (!ft_duplicates_check(*a, (int)value))
+		if (!duplicates_check(*a, (int)value))
 			free_and_exit(a, argv, argc);
 		add_new_node(a, (int)value);
 		i++;
