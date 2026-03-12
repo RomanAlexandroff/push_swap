@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-static char	*ft_next_word(char *input)
+static char	*next_word(char *input)
 {
 	static int	chr = 0;
 	char		*next_word;
@@ -22,7 +22,7 @@ static char	*ft_next_word(char *input)
 	return (next_word);
 }
 
-static int	ft_find_words(char *input)
+static int	find_words(char *input)
 {
 	int		word_count;
 	bool	word_detected;
@@ -48,14 +48,14 @@ static int	ft_find_words(char *input)
 	return (word_count);
 }
 
-char	**ft_extract_values(char *input)
+char	**extract_values(char *input)
 {
 	int		word_count;
 	char	**values;
 	int		i;
 
 	i = 0;
-	word_count = ft_find_words(input);
+	word_count = find_words(input);
 	if (!word_count)
 		exit(1);
 	values = malloc(sizeof(char *) * (size_t)(word_count + 2));
@@ -71,7 +71,7 @@ char	**ft_extract_values(char *input)
 			values[i++][0] = '\0';
 			continue ;
 		}
-		values[i++] = ft_next_word(input);
+		values[i++] = next_word(input);
 	}
 	values[i] = NULL;
 	return (values);

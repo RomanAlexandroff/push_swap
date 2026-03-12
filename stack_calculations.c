@@ -1,7 +1,7 @@
 
 #include "push_swap.h"
 
-t_node	*ft_get_last_node(t_node *node)
+t_node	*get_last_node(t_node *node)
 {
 	if (node == NULL)
 		return (NULL);
@@ -10,7 +10,7 @@ t_node	*ft_get_last_node(t_node *node)
 	return (node);
 }
 
-t_node	*ft_get_lowest_value(t_node *stack)
+t_node	*get_lowest_value(t_node *stack)
 {
 	long	lowest_value;
 	t_node	*smallest_node;
@@ -34,7 +34,7 @@ t_node	*ft_get_lowest_value(t_node *stack)
  * Next node to solve is the node from stack B with
  * the least amount of steps to sort into stack A
 */
-t_node	*ft_find_next_to_solve(t_node *stack)
+t_node	*find_next_to_solve(t_node *stack)
 {
 	if (stack == NULL)
 		return (NULL);
@@ -47,7 +47,7 @@ t_node	*ft_find_next_to_solve(t_node *stack)
 	return (NULL);
 }
 
-int	ft_get_stack_length(t_node *stack)
+int	get_stack_length(t_node *stack)
 {
 	int	count;
 
@@ -62,7 +62,7 @@ int	ft_get_stack_length(t_node *stack)
 	return (count);
 }
 
-bool	ft_is_sorted(t_node *stack)
+bool	is_sorted(t_node *stack)
 {
 	if (stack == NULL)								// стандартная проверка на ошибки
 		return (true);

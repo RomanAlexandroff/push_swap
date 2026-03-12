@@ -5,7 +5,7 @@
  * Destination for stack B node is
  * above stack A node with bigger value
 */
-static void	ft_destination_update(t_node *a, t_node *b)
+static void	destination_update(t_node *a, t_node *b)
 {
 	t_node	*current_a;
 	t_node	*destination;
@@ -26,14 +26,14 @@ static void	ft_destination_update(t_node *a, t_node *b)
 			current_a = current_a->node_after;
 		}
 		if (best_match_index == LONG_MAX)
-			b->destination = ft_get_lowest_value(a);
+			b->destination = get_lowest_value(a);
 		else
 			b->destination = destination;
 		b = b->node_after;
 	}
 }
 
-void	ft_position_update(t_node *stack)
+void	position_update(t_node *stack)
 {
 	int	i;
 	int	centerline;
@@ -42,7 +42,7 @@ void	ft_position_update(t_node *stack)
     centerline = 0;
 	if (stack == NULL)
 		return ;
-	centerline = ft_get_stack_length(stack) / 2;
+	centerline = get_stack_length(stack) / 2;
 	while (stack)
 	{
 		stack->node_position = i;
@@ -55,13 +55,13 @@ void	ft_position_update(t_node *stack)
 	}
 }
 
-void	ft_solving_cost_update(t_node *a, t_node *b)
+void	solving_cost_update(t_node *a, t_node *b)
 {
 	int	length_a;
 	int	length_b;
 
-	length_a = ft_get_stack_length(a);
-	length_b = ft_get_stack_length(b);
+	length_a = get_stack_length(a);
+	length_b = get_stack_length(b);
 	while (b)
 	{
 		b->solving_cost = b->node_position;
@@ -79,7 +79,7 @@ void	ft_solving_cost_update(t_node *a, t_node *b)
  * Next node to solve is the node from stack B with
  * the least amount of steps to sort into stack A
 */
-void	ft_next_to_solve_update(t_node *b)
+void	next_to_solve_update(t_node *b)
 {
 	long	best_match_value;
 	t_node	*best_match_node;
@@ -99,11 +99,11 @@ void	ft_next_to_solve_update(t_node *b)
 	best_match_node->next_to_solve = true;
 }
 
-void	ft_update_nodes(t_node *a, t_node *b)
+void	update_nodes(t_node *a, t_node *b)
 {
-    ft_position_update(a);
-	ft_position_update(b);
-	ft_destination_update(a, b);
-	ft_solving_cost_update(a, b);
-	ft_next_to_solve_update(b);
+    position_update(a);
+	position_update(b);
+	destination_update(a, b);
+	solving_cost_update(a, b);
+	next_to_solve_update(b);
 }

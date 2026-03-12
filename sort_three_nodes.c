@@ -3,7 +3,7 @@
 /*
  * Finds node with the largest value
 */
-static t_node	*ft_get_largest_node(t_node *stack)
+static t_node	*get_largest_node(t_node *stack)
 {
 	int		largest_value;
 	t_node	*largest_node;
@@ -23,15 +23,15 @@ static t_node	*ft_get_largest_node(t_node *stack)
 	return (largest_node);
 }
 
-void	ft_sort_three(t_node **a)
+void	sort_three(t_node **a)
 {
 	t_node	*largest_node;
 
-	largest_node = ft_get_largest_node(*a);
+	largest_node = get_largest_node(*a);
 	if (*a == largest_node)
-		ft_rotate_a(a);
+		rotate_a(a);
 	else if ((*a)->node_after == largest_node)
-		ft_reverse_a(a);
+		reverse_a(a);
 	if ((*a)->value > (*a)->node_after->value)
-		ft_swap_a(a);
+		swap_a(a);
 }

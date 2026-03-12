@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-static void	ft_push(t_node **from, t_node **to)
+static void	push(t_node **from, t_node **to)
 {
 	t_node	*node_to_push;
 
@@ -24,14 +24,14 @@ static void	ft_push(t_node **from, t_node **to)
 	}
 }
 
-void	ft_push_to_a(t_node **a, t_node **b)
+void	push_to_a(t_node **a, t_node **b)
 {
-	ft_push(b, a);
+	push(b, a);
 	write(1, "pa\n", 3);
 }
 
-void	ft_push_to_b(t_node **a, t_node **b)
+void	push_to_b(t_node **a, t_node **b)
 {
-	ft_push(a, b);
+	push(a, b);
 	write(1, "pb\n", 3);
 }

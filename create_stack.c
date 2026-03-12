@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-static void	ft_add_new_node(t_node **stack, int value)
+static void	add_new_node(t_node **stack, int value)
 {
 	t_node	*new_node;
 	t_node	*last_node;
@@ -19,7 +19,7 @@ static void	ft_add_new_node(t_node **stack, int value)
 	}
 	else
 	{
-		last_node = ft_get_last_node(*stack);
+		last_node = get_last_node(*stack);
 		last_node->node_after = new_node;
 		new_node->node_before = last_node;
 	}
@@ -53,7 +53,7 @@ static long	ft_atod(const char *str)
 	return (sign * result);
 }
 
-void	ft_create_stack_safely(t_node **a, char **argv, int argc)
+void	create_stack_safely(t_node **a, char **argv, int argc)
 {
 	long	value;
 	int		i;
@@ -62,16 +62,16 @@ void	ft_create_stack_safely(t_node **a, char **argv, int argc)
 	i = 0;
 	while (argv[i])
 	{
-		if (!ft_characters_check(argv[i]))
-			ft_free_and_exit(a, argv, argc);
+		if (!characters_check(argv[i]))
+			free_and_exit(a, argv, argc);
 		value = ft_atod(argv[i]);
 		if (value < INT_MIN || value > INT_MAX)
-			ft_free_and_exit(a, argv, argc);
+			free_and_exit(a, argv, argc);
 		if (!ft_duplicates_check(*a, (int)value))
-			ft_free_and_exit(a, argv, argc);
-		ft_add_new_node(a, (int)value);
+			free_and_exit(a, argv, argc);
+		add_new_node(a, (int)value);
 		i++;
 	}
 	if (argc == 2)
-		ft_free_argv_mem(argv);
+		free_argv_mem(argv);
 }

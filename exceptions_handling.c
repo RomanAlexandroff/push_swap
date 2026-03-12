@@ -4,7 +4,7 @@
 /*
  * Looks for unacceptable characters
 */
-int	ft_characters_check(char *input)
+int	characters_check(char *input)
 {
 	if (!(*input == '+'
 			|| *input == '-'
@@ -22,7 +22,7 @@ int	ft_characters_check(char *input)
 	return (true);
 }
 
-int	ft_duplicates_check(t_node *a, int input)
+int	duplicates_check(t_node *a, int input)
 {
 	if (a == NULL)
 		return (true);
@@ -35,7 +35,7 @@ int	ft_duplicates_check(t_node *a, int input)
 	return (true);
 }
 
-void	ft_free_argv_mem(char **argv)
+void	free_argv_mem(char **argv)
 {
 	int	i;
 
@@ -47,7 +47,7 @@ void	ft_free_argv_mem(char **argv)
 	free(argv - 1);
 }
 
-void	ft_free_stack_mem(t_node **stack)
+void	free_stack_mem(t_node **stack)
 {
 	t_node	*buffer;
 	t_node	*current;
@@ -64,11 +64,11 @@ void	ft_free_stack_mem(t_node **stack)
 	*stack = NULL;
 }
 
-void	ft_free_and_exit(t_node **a, char **argv, int argc)
+void	free_and_exit(t_node **a, char **argv, int argc)
 {
-	ft_free_stack_mem(a);
+	free_stack_mem(a);
 	if (argc == 2)
-		ft_free_argv_mem(argv);
+		free_argv_mem(argv);
 	write(2, "Error\n", 6);
 	exit(1);
 }
