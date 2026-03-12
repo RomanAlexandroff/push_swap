@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-static char	*next_word(char *input)
+static char	*next_word(char *str)
 {
 	static int	chr = 0;
 	char		*next_word;
@@ -9,20 +9,20 @@ static char	*next_word(char *input)
 
 	len = 0;
 	i = 0;
-	while (input[chr] == ' ')
+	while (str[chr] == ' ')
 		chr++;
-	while ((input[chr + len] != ' ') && input[chr + len])
+	while ((str[chr + len] != ' ') && str[chr + len])
 		len++;
-	next_word = malloc((size_t)len * sizeof(char) + 1);
-	if (next_word == NULL)
+	next_word = malloc(sizeof(char) * (len + 1));
+	if (!next_word)
 		return (NULL);
-	while ((input[chr] != ' ') && input[chr])
-		next_word[i++] = input[chr++];
+	while ((str[chr] != ' ') && str[chr])
+		next_word[i++] = str[chr++];
 	next_word[i] = '\0';
 	return (next_word);
 }
 
-static int	find_words(char *input)
+static int	find_words(char *str)
 {
 	int		word_count;
 	bool	word_detected;
@@ -30,12 +30,12 @@ static int	find_words(char *input)
 
 	word_count = 0;
     i = 0;
-	while (input[i])
+	while (str[i])
 	{
 		word_detected = false;
-		while (input[i] == ' ' && input[i])
+		while (str[i] == ' ' && str[i])
 			i++;
-		while (input[i] != ' ' && input[i])
+		while (str[i] != ' ' && str[i])
 		{
 			if (!word_detected)
 			{
@@ -48,18 +48,18 @@ static int	find_words(char *input)
 	return (word_count);
 }
 
-char	**extract_values(char *input)
+char	**extract_values(char *user_input)
 {
 	int		word_count;
 	char	**values;
 	int		i;
 
 	i = 0;
-	word_count = find_words(input);
+	word_count = find_words(user_input);
 	if (!word_count)
 		exit(1);
-	values = malloc(sizeof(char *) * (size_t)(word_count + 2));
-	if (values == NULL)
+	values = malloc(sizeof(char *) * (word_count + 2));
+	if (!values)
 		return (NULL);
 	while (word_count-- >= 0)
 	{
@@ -71,7 +71,7 @@ char	**extract_values(char *input)
 			values[i++][0] = '\0';
 			continue ;
 		}
-		values[i++] = next_word(input);
+		values[i++] = next_word(user_input);
 	}
 	values[i] = NULL;
 	return (values);

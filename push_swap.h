@@ -20,7 +20,7 @@ typedef struct s_node
 	bool			next_to_solve;
 }				t_node;
 
-char	**extract_values(char *input);
+char	**extract_values(char *user_input);
 void	create_stack_safely(t_node **a, char **argv, int argc);
 int	    characters_check(char *input);
 int	    duplicates_check(t_node *a, int input);
@@ -54,6 +54,7 @@ void	reverse_both(t_node **a, t_node **b);
 #endif
 
 /*			TO-DO LIST
+	- create README.md as per project subject
 	- check if it compiles on Ubuntu
 	- run Tests (make test)
 	- make sure the subject does not have any changes, that I have not implemented
