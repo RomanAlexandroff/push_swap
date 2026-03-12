@@ -22,6 +22,7 @@ $(NAME): $(OBJS)
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+# change ARG by running like this: make test ARG="1 2 3" 
 test:
 	@make -C ../push_swap_tester
 	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
