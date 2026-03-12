@@ -1,6 +1,5 @@
+
 NAME = push_swap
-CC = cc
-CFLAGS = -Wall -Wextra -Werrorß 
 
 SRCS = push_swap.c command_push.c command_reverse.c\
 		command_rotate.c command_swap.c create_stack.c\
@@ -9,7 +8,9 @@ SRCS = push_swap.c command_push.c command_reverse.c\
 		stack_calculations.c update_nodes.c
 OBJS = $(SRCS:.c=.o)
 
-.PHONY: all clean fclean re
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+RM = rm -f
 
 all: $(NAME)
 
@@ -19,14 +20,35 @@ $(NAME): $(OBJS)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	
+
+norm:
+	@echo "\n\n========== RUNNING NORMINETTE ==========\n\n"
+	@norminette -R CheckForbiddenSourceHeader
+	@echo "\n\n========= THE RESULTS END HERE =========\n\n"
+
+git:
+	@if [ -n "$$(git status --porcelain)" ]; then \
+		read -p "Commit message: " msg; \
+		if [ -z "$$msg" ]; then \
+			msg="$(COMMIT_MSG)"; \
+		fi; \
+		echo "Committing with message: $$msg"; \
+		git add .; \
+		git commit -m "$$msg"; \
+		git push; \
+	else \
+		echo "No changes detected."; \
+	fi
+
 clean :
-	@rm -f $(OBJS)
+	@$(RM) $(OBJS)
 	@echo "Object files have been removed."
 
 fclean : clean
-	@rm -f $(NAME)
+	@$(RM) $(NAME)
 	@echo "Executable has been removed."
 
 re : fclean all
 	@echo "Rebuilding the project is complete."
+
+.PHONY: all norm git clean fclean re
