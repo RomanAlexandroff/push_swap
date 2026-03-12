@@ -8,6 +8,7 @@ SRCS = push_swap.c command_push.c command_reverse.c\
 		stack_calculations.c update_nodes.c
 OBJS = $(SRCS:.c=.o)
 
+ARG ?= "4 67 3 87 23 -234 0"
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
@@ -20,6 +21,19 @@ $(NAME): $(OBJS)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
+
+test:
+	@make -C ../push_swap_tester
+	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+	@echo "Push_swap has been compiled."
+	@echo "\nRunning the test...\n"
+	@echo "Push_swap output:"
+	@./$(NAME) $(ARG)
+	@echo "\nRunning Checker:"
+	@./$(NAME) $(ARG) | ./checker $(ARG)
+	@$(RM) $(NAME)
+	@$(RM) checker
+	@echo "\nTest is concluded.\n"
 
 norm:
 	@echo "\n\n========== RUNNING NORMINETTE ==========\n\n"
