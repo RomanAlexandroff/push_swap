@@ -52,3 +52,14 @@ void	ft_reverse_b(t_node **b);
 void	ft_reverse_both(t_node **a, t_node **b);
 
 #endif
+
+/*			TO-DO LIST
+	- check if it compiles on Ubuntu
+	- run Tests (make test)
+	- make sure the subject does not have any changes, that I have not implemented
+	- add heads to all the files
+	- run Norminette (make norm) with all the flags and fix whatever it says
+	- THIS PROJECT REQUIRES MAKEFILE TO BE SUBMITED !
+		get_next_line did not need you to submit a Makefile, but it was an exception,
+		push_swap does require a Makifile to be submited.
+*/
