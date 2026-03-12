@@ -5,10 +5,10 @@ static void	add_new_node(t_node **stack, int value)
 	t_node	*new_node;
 	t_node	*last_node;
 
-	if (stack == NULL)
+	if (!stack)
 		return ;
 	new_node = malloc(sizeof(t_node));
-	if (new_node == NULL)
+	if (!new_node)
 		return ;
 	new_node->node_after = NULL;
 	new_node->value = value;
@@ -27,15 +27,15 @@ static void	add_new_node(t_node **stack, int value)
 
 static long	ft_atod(const char *str)
 {
-	long	result;
+	long	output;
 	int		sign;
 	int		i;
 
-	result = 0;
-	sign = +1;
+	output = 0;
+	sign = 1;
 	i = 0;
-	while (str[i] && (str[i] == ' ' || str[i] == '\t'
-			|| str[i] == '\n' || str[i] == '\r'
+	while (str[i] && (str[i] == ' ' || str[i] == '\t' \
+			|| str[i] == '\n' || str[i] == '\r' \
 			|| str[i] == '\v' || str[i] == '\f'))
 		i++;
 	if (str[i] == '+')
@@ -47,10 +47,11 @@ static long	ft_atod(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		result = (result * 10) + (str[i] - '0');
+		output *= 10;
+		output += str[i] - '0';
 		i++;
 	}
-	return (sign * result);
+	return (sign * output);
 }
 
 void	create_stack_safely(t_node **a, char **argv, int argc)
