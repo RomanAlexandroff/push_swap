@@ -64,3 +64,6 @@ void	reverse_both(t_node **a, t_node **b);
 		get_next_line did not need you to submit a Makefile, but it was an exception,
 		push_swap does require a Makifile to be submited.
 */
+/*			WHAT EVERYTHING AI WAS USED IN THIS PROJECT FOR
+	- helped me install norminette for home use
+*/

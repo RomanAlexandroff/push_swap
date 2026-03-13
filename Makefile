@@ -11,6 +11,7 @@ OBJS = $(SRCS:.c=.o)
 ARG ?= "4 67 3 87 23 -234 0"
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+DEBUG_FLAGS = -fsanitize=address -g
 RM = rm -f
 
 all: $(NAME)
@@ -25,7 +26,7 @@ $(NAME): $(OBJS)
 # change ARG by running like this: make test ARG="1 2 3" 
 test:
 	@make -C ../push_swap_tester
-	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+	$(CC) $(SRCS) $(CFLAGS) $(DEBUG_FLAGS) -o $(NAME)
 	@echo "Push_swap has been compiled."
 	@echo "\nRunning the test...\n"
 	@echo "Push_swap output:"
