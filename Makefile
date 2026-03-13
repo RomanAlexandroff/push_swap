@@ -11,8 +11,11 @@ OBJS = $(SRCS:.c=.o)
 ARG ?= "4 67 3 87 23 -234 0"
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-DEBUG_FLAGS = -fsanitize=address -g
+DEBUG_FLAGS = -fsanitize=address
 RM = rm -f
+
+# Detect the Operating System
+UNAME := $(shell uname -s)
 
 all: $(NAME)
 
@@ -22,6 +25,11 @@ $(NAME): $(OBJS)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
+
+norm:
+	@echo "\n\n========== RUNNING NORMINETTE ==========\n\n"
+	@norminette -R CheckForbiddenSourceHeader
+	@echo "\n\n========= THE RESULTS END HERE =========\n\n"
 
 # change ARG by running like this: make test ARG="1 2 3" 
 test:
@@ -33,15 +41,24 @@ test:
 	@./$(NAME) $(ARG)
 	@echo "\nRunning Checker:"
 	@./$(NAME) $(ARG) | ./checker $(ARG)
-	@$(RM) -r $(NAME).dSYM
 	@$(RM) $(NAME)
 	@$(RM) checker
 	@echo "\nTest is concluded.\n"
 
-norm:
-	@echo "\n\n========== RUNNING NORMINETTE ==========\n\n"
-	@norminette -R CheckForbiddenSourceHeader
-	@echo "\n\n========= THE RESULTS END HERE =========\n\n"
+valgrind:
+ifeq ($(UNAME),Darwin)
+	@echo "Using Leaks for memory checking..."
+	@$(CC) $(CFLAGS) $(SRCS) -g -o $(NAME)
+	@leaks --atExit -- ./$(NAME) $(ARG)
+	@$(RM) $(NAME)
+	@$(RM) -r $(NAME).dSYM
+else
+	@echo "Using Valgrind for memory checking..."
+	@$(CC) $(CFLAGS) $(SRCS) -g -o $(NAME)
+	@valgrind --leak-check=full --show-leak-kinds=all \
+		--track-origins=yes --track-fds=yes --verbose ./$(NAME) $(ARG)
+	@$(RM) $(NAME)
+endif
 
 git:
 	@if [ -n "$$(git status --porcelain)" ]; then \
@@ -68,4 +85,4 @@ fclean : clean
 re : fclean all
 	@echo "Rebuilding the project is complete."
 
-.PHONY: all norm git clean fclean re
+.PHONY: all norm test valgrind git clean fclean re
