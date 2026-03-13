@@ -33,6 +33,7 @@ test:
 	@./$(NAME) $(ARG)
 	@echo "\nRunning Checker:"
 	@./$(NAME) $(ARG) | ./checker $(ARG)
+	@$(RM) -r $(NAME).dSYM
 	@$(RM) $(NAME)
 	@$(RM) checker
 	@echo "\nTest is concluded.\n"
