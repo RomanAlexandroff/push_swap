@@ -32,7 +32,7 @@ norm:
 	@norminette -R CheckForbiddenSourceHeader
 	@echo "\n\n========= THE RESULTS END HERE =========\n\n"
 
-# change ARG by running like this: make test ARG="1 2 3" 
+#change ARG by running like this: make test ARG="1 2 3" 
 test:
 	@make -C ../push_swap_tester
 	$(CC) $(SRCS) $(CFLAGS) $(DEBUG_FLAGS) -o $(NAME)
@@ -46,7 +46,7 @@ test:
 	@$(RM) checker
 	@echo "\nTest is concluded.\n"
 
-# this rule will call Valgrind or Leaks depending on the OS
+#this rule calls Valgrind or Leaks depending on the OS
 valgrind:
 ifeq ($(UNAME),Darwin)
 	@echo "Using Leaks for memory checking..."
@@ -59,6 +59,21 @@ else
 	@$(CC) $(CFLAGS) $(SRCS) -g -o $(NAME)
 	@valgrind --leak-check=full --show-leak-kinds=all \
 		--track-origins=yes --track-fds=yes --verbose ./$(NAME) $(ARG)
+	@$(RM) $(NAME)
+endif
+
+#calls GDB or LLDB depending on the detected OS
+gdb:
+ifeq ($(UNAME),Darwin)
+	@echo "Using LLDB."
+	@$(CC) $(CFLAGS) $(SRCS) -g -o $(NAME)
+	@lldb ./$(NAME) $(ARG)
+	@$(RM) $(NAME)
+	@$(RM) -r $(NAME).dSYM
+else
+	@echo "Using GDB."
+	@$(CC) $(CFLAGS) $(SRCS) -g -o $(NAME)
+	@gdb ./$(NAME) $(ARG)
 	@$(RM) $(NAME)
 endif
 
