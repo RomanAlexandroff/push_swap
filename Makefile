@@ -13,6 +13,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 DEBUG_FLAGS = -fsanitize=address
 RM = rm -f
+COMMIT_MSG ?= Auto-commit from Makefile
 
 # Detect the Operating System
 UNAME := $(shell uname -s)
@@ -45,6 +46,7 @@ test:
 	@$(RM) checker
 	@echo "\nTest is concluded.\n"
 
+# this rule will call Valgrind or Leaks depending on the OS
 valgrind:
 ifeq ($(UNAME),Darwin)
 	@echo "Using Leaks for memory checking..."
