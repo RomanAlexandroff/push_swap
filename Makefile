@@ -49,13 +49,13 @@ test:
 #this rule calls Valgrind or Leaks depending on the OS
 valgrind:
 ifeq ($(UNAME),Darwin)
-	@echo "Using Leaks for memory checking..."
+	@echo "Using Leaks for memory checking."
 	@$(CC) $(CFLAGS) $(SRCS) -g -o $(NAME)
 	@leaks --atExit -- ./$(NAME) $(ARG)
 	@$(RM) $(NAME)
 	@$(RM) -r $(NAME).dSYM
 else
-	@echo "Using Valgrind for memory checking..."
+	@echo "Using Valgrind for memory checking."
 	@$(CC) $(CFLAGS) $(SRCS) -g -o $(NAME)
 	@valgrind --leak-check=full --show-leak-kinds=all \
 		--track-origins=yes --track-fds=yes --verbose ./$(NAME) $(ARG)
@@ -102,4 +102,4 @@ fclean : clean
 re : fclean all
 	@echo "Rebuilding the project is complete."
 
-.PHONY: all norm test valgrind git clean fclean re
+.PHONY: all norm test valgrind gdb git clean fclean re
