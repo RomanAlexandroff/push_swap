@@ -8,7 +8,7 @@ SRCS = push_swap.c command_push.c command_reverse.c\
 		stack_calculations.c update_nodes.c
 OBJS = $(SRCS:.c=.o)
 
-ARG ?= "4 67 3 87 23 -234 0"
+ARG ?= "4 67 3 87 23 -234"
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 DEBUG_FLAGS = -fsanitize=address

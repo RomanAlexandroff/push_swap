@@ -79,7 +79,7 @@ char	**extract_values(char *user_input)
 		{
 			values[i] = malloc(sizeof(char));
 			if (values[i] == NULL)
-				return (NULL);
+				return (NULL);							// forgot to free everything allocated before
 			values[i++][0] = '\0';
 			continue ;
 		}

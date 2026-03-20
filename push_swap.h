@@ -66,6 +66,9 @@ void	reverse_both(t_node **a, t_node **b);
 #endif
 
 /*			TO-DO LIST
+	- Работа над данным проектом преостановлена пока у меня не будет оригинального
+		школьного чекера из Интры и я ни смогу тестировать программу
+
 	- create README.md as per project subject
 	- check if it compiles on Ubuntu
 	- run Tests (make test)

@@ -20,11 +20,14 @@ int	main(int argc, char **argv)
 
 	a = NULL;
 	b = NULL;
-    nodes_count = 0;
-	if (argc <= 1 || (argc == 2 && !argv[1][0]))
+	if (argc <= 1 || (argc == 2 && !argv[1]))
 		return (1);
 	else if (argc == 2)
+	{
 		argv = extract_values(argv[1]);
+		if (!argv)								// if malloc fails
+			free_and_exit(&a, argv + 1, argc);
+	}
 	create_stack_safely(&a, argv + 1, argc);
     nodes_count = get_stack_length(a);
 	if (!is_sorted(a))
@@ -36,6 +39,5 @@ int	main(int argc, char **argv)
 		else
 			sort_many(&a, &b);
 	}
-	free_stack_mem(&a);
-	return (0);
+	return (free_stack_mem(&a), 0);
 }
