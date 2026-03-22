@@ -47,8 +47,8 @@ static long	ft_atod(const char *str)
 	output = 0;
 	sign = 1;
 	i = 0;
-	while (str[i] && (str[i] == ' ' || str[i] == '\t' \
-			|| str[i] == '\n' || str[i] == '\r' \
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'
+			|| str[i] == '\n' || str[i] == '\r'
 			|| str[i] == '\v' || str[i] == '\f'))
 		i++;
 	if (str[i] == '+')
