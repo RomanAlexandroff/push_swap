@@ -12,16 +12,16 @@
 
 #include "push_swap.h"
 
-static void	add_new_node(t_node **stack, int value)
+static int	add_new_node(t_node **stack, int value)
 {
 	t_node	*new_node;
 	t_node	*last_node;
 
 	if (!stack)
-		return ;
+		return (0);
 	new_node = malloc(sizeof(t_node));
 	if (!new_node)
-		return ;
+		return (0);
 	new_node->node_after = NULL;
 	new_node->value = value;
 	if (*stack == NULL)
@@ -35,6 +35,7 @@ static void	add_new_node(t_node **stack, int value)
 		last_node->node_after = new_node;
 		new_node->node_before = last_node;
 	}
+	return (1);
 }
 
 static long	ft_atod(const char *str)
@@ -82,7 +83,8 @@ void	create_stack_safely(t_node **a, char **argv, int argc)
 			free_and_exit(a, argv, argc);
 		if (!duplicates_check(*a, (int)value))
 			free_and_exit(a, argv, argc);
-		add_new_node(a, (int)value);
+		if (!add_new_node(a, (int)value))
+			free_and_exit(a, argv, argc);
 		i++;
 	}
 	if (argc == 2)

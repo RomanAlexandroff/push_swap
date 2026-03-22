@@ -81,5 +81,5 @@ void	free_and_exit(t_node **a, char **argv, int argc)
 	if (argc == 2)
 		free_argv_mem(argv);
 	write(2, "Error\n", 6);
-	exit(1);
+	exit(EXIT_FAILURE);
 }

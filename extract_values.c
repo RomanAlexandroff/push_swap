@@ -69,7 +69,7 @@ char	**extract_values(char *user_input)
 	i = 0;
 	word_count = find_words(user_input);
 	if (!word_count)
-		exit(1);
+		exit(EXIT_FAILURE);
 	values = malloc(sizeof(char *) * (word_count + 2));
 	if (!values)
 		return (NULL);

@@ -12,9 +12,6 @@
 
 #include "push_swap.h"
 
-/*
- * TO:DO: explain brackets in (*top_node)->node_after
-*/
 static void	swap(t_node **top_node)
 {
 	int	length;
