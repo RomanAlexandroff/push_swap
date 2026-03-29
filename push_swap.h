@@ -69,6 +69,9 @@ void	reverse_both(t_node **a, t_node **b);
 	- Работа над данным проектом преостановлена пока у меня не будет оригинального
 		школьного чекера из Интры и я ни смогу тестировать программу
 
+	- FOR TESTS
+		https://push-swap42-visualizer.vercel.app
+
 	- create README.md as per project subject
 	- check if it compiles on Ubuntu
 	- run Tests (make test)
