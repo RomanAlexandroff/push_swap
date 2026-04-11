@@ -34,16 +34,14 @@ norm:
 
 # change ARG by running like this: make test ARG="1 2 3" 
 test:
-	@make -C ../push_swap_tester
 	$(CC) $(SRCS) $(CFLAGS) $(DEBUG_FLAGS) -o $(NAME)
 	@echo "Push_swap has been compiled."
 	@echo "\nRunning the test...\n"
 	@echo "Push_swap output:"
 	@./$(NAME) $(ARG)
 	@echo "\nRunning Checker:"
-	@./$(NAME) $(ARG) | ./checker $(ARG)
+	@./$(NAME) $(ARG) | ../checker_Mac $(ARG)
 	@$(RM) $(NAME)
-	@$(RM) checker
 	@echo "\nTest is concluded.\n"
 
 # this rule will call Valgrind or Leaks depending on the OS
