@@ -40,7 +40,12 @@ test:
 	@echo "Push_swap output:"
 	@./$(NAME) $(ARG)
 	@echo "\nRunning Checker:"
+# use chmode on the program file if it fails to run
+ifeq ($(UNAME),Darwin)
 	@./$(NAME) $(ARG) | ../checker_Mac $(ARG)
+else
+	@./$(NAME) $(ARG) | ../checker_linux $(ARG)
+endif
 	@$(RM) $(NAME)
 	@echo "\nTest is concluded.\n"
 
