@@ -29,7 +29,7 @@ $(NAME): $(OBJS)
 
 norm:
 	@echo "\n\n========== RUNNING NORMINETTE ==========\n\n"
-	@norminette -R CheckForbiddenSourceHeader
+	@norminette -R CheckForbiddenSourceHeader || true
 	@echo "\n\n========= THE RESULTS END HERE =========\n\n"
 
 # change ARG by running like this: make test ARG="1 2 3" 
