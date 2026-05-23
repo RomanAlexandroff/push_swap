@@ -17,19 +17,19 @@ static void	swap(t_node **top_node)
 	int	length;
 
 	length = 0;
-    length = get_stack_length(*top_node);
-    if (*top_node == NULL || top_node == NULL || length == 1)
-        return ;
-    *top_node = (*top_node)->node_after;
+	length = get_stack_length(*top_node);
+	if (*top_node == NULL || top_node == NULL || length == 1)
+		return ;
+	*top_node = (*top_node)->node_after;
 /* working with the 1st node */
-    (*top_node)->node_before->node_before = *top_node;
-    (*top_node)->node_before->node_after = (*top_node)->node_after;
+	(*top_node)->node_before->node_before = *top_node;
+	(*top_node)->node_before->node_after = (*top_node)->node_after;
 /* working with the 3rd node */
-    if ((*top_node)->node_after)
-        (*top_node)->node_after->node_before = (*top_node)->node_before;
+	if ((*top_node)->node_after)
+		(*top_node)->node_after->node_before = (*top_node)->node_before;
 /*  working with the 2nd node  */
-    (*top_node)->node_after = (*top_node)->node_before;
-    (*top_node)->node_before = NULL;
+	(*top_node)->node_after = (*top_node)->node_before;
+	(*top_node)->node_before = NULL;
 }
 
 void	swap_a(t_node **a)

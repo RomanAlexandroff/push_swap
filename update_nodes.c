@@ -50,7 +50,7 @@ void	position_update(t_node *stack)
 	int	centerline;
 
 	i = 0;
-    centerline = 0;
+	centerline = 0;
 	if (stack == NULL)
 		return ;
 	centerline = get_stack_length(stack) / 2;
@@ -112,7 +112,7 @@ void	next_to_solve_update(t_node *b)
 
 void	update_nodes(t_node *a, t_node *b)
 {
-    position_update(a);
+	position_update(a);
 	position_update(b);
 	destination_update(a, b);
 	solving_cost_update(a, b);

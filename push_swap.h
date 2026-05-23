@@ -26,23 +26,23 @@ typedef struct s_node
 	int				node_position;
 	struct s_node	*node_before;
 	struct s_node	*node_after;
-    struct s_node	*destination;
-    int	    		solving_cost;
+	struct s_node	*destination;
+	int				solving_cost;
 	bool			top_half_flag;
 	bool			next_to_solve;
 }				t_node;
 
 char	**extract_values(char *user_input);
 void	create_stack_safely(t_node **a, char **argv, int argc);
-int	    characters_check(char *input);
-int	    duplicates_check(t_node *a, int input);
+int		characters_check(char *input);
+int		duplicates_check(t_node *a, int input);
 void	free_argv_mem(char **argv);
 void	free_stack_mem(t_node **stack);
 void	free_and_exit(t_node **a, char **argv, int argc);
 t_node	*get_last_node(t_node *node);
 t_node	*get_lowest_value(t_node *stack);
 t_node	*find_next_to_solve(t_node *stack);
-int	    get_stack_length(t_node *stack);
+int		get_stack_length(t_node *stack);
 bool	is_sorted(t_node *stack);
 void	position_update(t_node *stack);
 void	solving_cost_update(t_node *a, t_node *b);
@@ -66,21 +66,22 @@ void	reverse_both(t_node **a, t_node **b);
 #endif
 
 /*			TO-DO LIST
-	- Работа над данным проектом преостановлена пока у меня не будет оригинального
-		школьного чекера из Интры и я ни смогу тестировать программу
 
 	- FOR TESTS
 		https://push-swap42-visualizer.vercel.app
 
 	- create README.md as per project subject
 	- check if it compiles on Ubuntu
+	- use chmode to ensure Moulinette has rights to run it
 	- run Tests (make test)
-	- make sure the subject does not have any changes, that I have not implemented
+	- make sure the subject does not have any changes, that
+		I have not implemented
 	- add heads to all the files
-	- run Norminette (make norm) with all the flags and fix whatever it says
+	- run Norminette (make norm) with all the flags and fix
+		whatever it says
 	- THIS PROJECT REQUIRES MAKEFILE TO BE SUBMITED !
-		get_next_line did not need you to submit a Makefile, but it was an exception,
-		push_swap does require a Makifile to be submited.
+		get_next_line did not need you to submit a Makefile, but it was 
+		an exception, push_swap does require a Makifile to be submited.
 */
 /*			WHAT EVERYTHING AI WAS USED IN THIS PROJECT FOR
 	- helped me install norminette for home use

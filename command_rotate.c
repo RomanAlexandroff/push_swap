@@ -26,7 +26,7 @@ static void	rotate(t_node **stack)
 	(*stack)->node_before = NULL;
 	last_node->node_after->node_before = last_node;
 	last_node->node_after->node_after = NULL;
-}	
+}
 
 void	rotate_a(t_node **a)
 {

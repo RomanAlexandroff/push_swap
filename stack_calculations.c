@@ -75,13 +75,13 @@ int	get_stack_length(t_node *stack)
 
 bool	is_sorted(t_node *stack)
 {
-	if (stack == NULL)								// стандартная проверка на ошибки
+	if (stack == NULL)
 		return (true);
-	while (stack->node_after)								// идём по листам связного списка до самого последнего листа (на последнем листе не будет адреса следующего листа) 
+	while (stack->node_after)
 	{
-		if (stack->value > stack->node_after->value)		// числа в спике должны быть отсортированы по-возрастающей, поэтому как только нынешнее число окажется больше следующего, значит список НЕ отсортирован
+		if (stack->value > stack->node_after->value)
 			return (false);
-		stack = stack->node_after;						// переключаем адрес проверяемого листа связного списка на следующий лист
+		stack = stack->node_after;
 	}
-	return (true);									// если мы дошли сюда и нас не выкинуло из функции раньше, значит числа в списке отсортированы правильно
+	return (true);
 }

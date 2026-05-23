@@ -38,10 +38,10 @@ static int	find_words(char *str)
 {
 	int		word_count;
 	bool	word_detected;
-    int     i;
+	int		i;
 
 	word_count = 0;
-    i = 0;
+	i = 0;
 	while (str[i])
 	{
 		word_detected = false;

@@ -21,7 +21,7 @@ static t_node	*get_largest_node(t_node *stack)
 	t_node	*largest_node;
 
 	largest_value = INT_MIN;
-    if (stack == NULL)
+	if (stack == NULL)
 		return (NULL);
 	while (stack)
 	{
