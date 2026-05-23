@@ -4,3 +4,4 @@
 *.out
 *.exe
 *.dSYM
+.gdb_history
