@@ -32,7 +32,7 @@ norm:
 	@norminette -R CheckForbiddenSourceHeader || true
 	@echo "\n\n========= THE RESULTS END HERE =========\n\n"
 
-#change ARG by running like this: make test ARG="1 2 3" 
+# change ARG by running like this: make test ARG="1 2 3" 
 test:
 	$(CC) $(SRCS) $(CFLAGS) $(DEBUG_FLAGS) -o $(NAME)
 	@echo "Push_swap has been compiled."
@@ -49,7 +49,7 @@ endif
 	@$(RM) $(NAME)
 	@echo "\nTest is concluded.\n"
 
-#this rule calls Valgrind or Leaks depending on the OS
+# this rule calls Valgrind or Leaks depending on the OS
 valgrind:
 ifeq ($(UNAME),Darwin)
 	@echo "Using Leaks for memory checking."
@@ -65,7 +65,7 @@ else
 	@$(RM) $(NAME)
 endif
 
-#calls GDB or LLDB depending on the detected OS
+# calls GDB or LLDB depending on the detected OS
 gdb:
 ifeq ($(UNAME),Darwin)
 	@echo "Using LLDB."
@@ -80,6 +80,7 @@ else
 	@$(RM) $(NAME)
 endif
 
+# performs "git add + commit + push" of the branch you're CURRENTLY on
 git:
 	@if [ -n "$$(git status --porcelain)" ]; then \
 		echo "The following changes will be added + commited + pushed"; \
@@ -98,6 +99,7 @@ git:
 		echo "No changes detected."; \
 	fi
 
+# pulls new updates from GitHub, helps update feature branches
 update:
 	@clear
 	@echo "============================================================"
