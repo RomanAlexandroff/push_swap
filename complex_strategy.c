@@ -6,7 +6,7 @@
 /*   By: ccrucian <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 16:00:07 by ccrucian          #+#    #+#             */
-/*   Updated: 2026/05/28 16:52:51 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/05/28 17:00:16 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	complex_strategy(t_node **a, t_node **b)
 	assign_index(*a);
 	max_bits = get_max_bits(*a);
 	bit_read = 0;
-	while (max_bits--)
+	while (bit_read < max_bits)
 	{
 		i = length;
 		while (i--)
