@@ -6,7 +6,7 @@
 /*   By: ccrucian <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 16:00:07 by ccrucian          #+#    #+#             */
-/*   Updated: 2026/05/28 17:09:48 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/05/28 17:12:19 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,12 @@ static int	get_max_bits(t_node *stack)
 	}
 	return (max_bits);
 }
+
+/*
+ * Sorts the stack using a binary radix sort algorithm.
+ * Each node is indexed according to its relative order,
+ * then elements are sorted bit by bit using two stacks.
+ */
 
 void	complex_strategy(t_node **a, t_node **b)
 {
