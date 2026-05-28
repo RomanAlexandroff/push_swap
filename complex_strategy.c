@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   complex_strategy.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccrucian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/28 16:00:07 by ccrucian          #+#    #+#             */
+/*   Updated: 2026/05/28 16:52:51 by ccrucian         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /*
@@ -56,9 +68,24 @@ void	complex_strategy(t_node **a, t_node **b)
 {
 	int	length;
 	int	max_bits;
+	int	i;
 
-	update_nodes
 	length = get_stack_length(*a);
 	assign_index(*a);
 	max_bits = get_max_bits(*a);
+	bit_read = 0;
+	while (max_bits--)
+	{
+		i = length;
+		while (i--)
+		{
+			if (((*a)->index >> bit_read) & 1)
+				rotate_a(a);
+			else
+				push_to_b(a, b);
+		}
+		while (*b)
+			push_to_a(a, b);
+		bit_read++;
+	}
 }
