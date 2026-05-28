@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/13 13:33:08 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/05/28 15:07:47 by roaleksa         ###   ########.fr       */
+/*   Created: 2026-03-13 13:33:08 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/05/28 14:49:25 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_node	*get_last_node(t_node *node);
 t_node	*get_lowest_value(t_node *stack);
 t_node	*find_next_to_solve(t_node *stack);
 int		get_stack_length(t_node *stack);
+double	compute_disorder(t_node *a, int nodes_count);
 bool	is_sorted(t_node *stack);
 void	position_update(t_node *stack);
 void	solving_cost_update(t_node *a, t_node *b);

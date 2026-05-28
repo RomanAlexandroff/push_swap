@@ -135,17 +135,14 @@ update:
 	echo ""; \
 	echo "You may now choose a feature branch to update"; \
 	echo "with the newest changes from the refactor branch."; \
+	echo "Please, do not use this rule to update main branch."; \
 	echo ""; \
-	echo "Examples:"; \
-	echo "  feature/parser"; \
-	echo "  feature/error-handling"; \
+	echo "OPTIONS:"; \
+	echo "- You can press ENTER without typing anything to skip this step."; \
+	echo "- You can run this rule multiple times if you want to update"; \
+	echo "  several feature branches."; \
 	echo ""; \
-	echo "IMPORTANT:"; \
-	echo "- Press ENTER without typing anything to skip."; \
-	echo "- You can run this rule multiple times"; \
-	echo "  if you want to update several feature branches."; \
-	echo ""; \
-	printf "Enter feature branch name to update: "; \
+	printf "Enter branch name to update: "; \
 	read FEATURE_BRANCH; \
 	echo ""; \
 	if [ -z "$$FEATURE_BRANCH" ]; then \
@@ -190,10 +187,10 @@ update:
 		echo ""; \
 		echo "HOW TO RESOLVE USING VS CODE:"; \
 		echo ""; \
-		echo "1. Open VS Code in the repository:"; \
+		echo "1. Open VS Code in the repository using this command:"; \
 		echo "      code ."; \
 		echo ""; \
-		echo "2. Open the files marked with conflicts."; \
+		echo "2. Open the files marked with conflicts (with "!" next to their names)."; \
 		echo ""; \
 		echo "3. VS Code will show sections like:"; \
 		echo ""; \
