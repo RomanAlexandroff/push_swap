@@ -6,7 +6,7 @@
 /*   By: ccrucian <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 16:00:07 by ccrucian          #+#    #+#             */
-/*   Updated: 2026/05/28 17:00:16 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/05/28 17:09:48 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	assign_index(t_node *stack)
 	current = stack;
 	while (current)
 	{
-		current->index = 0
+		current->index = 0;
 		i_node = stack;
 		while (i_node)
 		{
