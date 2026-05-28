@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42roma.it>      #+#  +:+       +#+        */
+/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-13 13:33:00 by roaleksa          #+#    #+#             */
-/*   Updated: 2026-03-13 13:33:00 by roaleksa         ###   ########.fr       */
+/*   Created: 2026/03/13 13:33:00 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/05/28 15:09:30 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,28 @@ int	main(int argc, char **argv)
 	t_node	*a;
 	t_node	*b;
 	int		nodes_count;
+	t_mode	complexity_mode;
+	bool	bench_flag;	
 
 	a = NULL;
 	b = NULL;
+	bench_flag = false;
+	complexity_mode = ADAPTIVE_MODE;								// default mode
+	// Input validation (to the extend of current possibilities)
 	if (argc <= 1 || (argc == 2 && !argv[1]))
 		return (EXIT_FAILURE);
-	else if (argc == 2)
-		argv = extract_values(argv[1]);
+	
+	// Make sure all the given arguments are in their individual strings
+	//		1. run through all the arguments inside ARGV
+	//		2. while running, if a string contains multiple values devided
+	//			by SPACE, split them into separate strings
+	//		3. place everything into a char **array
+	argv = split_arguments(argv[1], argc--);			// drop the name of the program
+	
 	if (!argv)								// if malloc fails
 		free_and_exit(&a, argv + 1, argc);
+
+	set_flags(argv, &complexity_mode, &bench_flag);
 	create_stack_safely(&a, argv + 1, argc);
 	nodes_count = get_stack_length(a);
 	if (!is_sorted(a))
