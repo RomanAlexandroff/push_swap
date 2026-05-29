@@ -12,6 +12,14 @@
 
 #include "push_swap.h"
 
+/*
+ *	Extracts a single word from a string and puts it into
+ *	its individual string - one word per function call,
+ *	just like get_next_line, but for words. Uses SPACE
+ *	character as delimeter. Returns a string with only
+ *	"\0" when a string has no more words in it. The caller
+ *	shall take care of freeing the memory of such a string.
+*/
 static char	*next_word(char *str)
 {
 	static int	chr = 0;
@@ -31,6 +39,8 @@ static char	*next_word(char *str)
 	while ((str[chr] != ' ') && str[chr])
 		next_word[i++] = str[chr++];
 	next_word[i] = '\0';
+	if (i == 0)
+		chr = 0;
 	return (next_word);
 }
 
@@ -53,6 +63,7 @@ static int	find_arguments(char **argv, int argc)
 	j = 0;
 	while (j < argc)
 	{
+		i = 0;
 		while (argv[j][i])
 		{
 			arg_detected = false;
@@ -84,27 +95,29 @@ char	**split_arguments(char **argv, int argc)
 	int		args_count;
 	char	**output;
 	int		i;
+	int		j;
 
-// TO-DO: make the function to work with multiple strings
-	i = 0;
 	args_count = find_arguments(argv, argc);
 	if (!args_count)
 		exit(EXIT_FAILURE);
-	output = malloc(sizeof(char *) * (args_count + 2));		// allocate memory for the array of pointers to strings
+	output = malloc(sizeof(char *) * (args_count + 1));		// allocate memory for the array of pointers to strings
 	if (!output)
 		return (NULL);
-	while (args_count-- >= 0)		// TODO: split here
+	i = 0;
+	j = 0;
+	while (i < args_count)
 	{
-		if (!i)
+		output[i] = next_word(argv[j]);
+		if (!output[i])
+			return (NULL);
+		if (output[i][0] == '\0')			// if next_word() did not find more words in a current string, then...
 		{
-			values[i] = malloc(sizeof(char));
-			if (values[i] == NULL)
-				return (NULL);							// forgot to free everything allocated before
-			values[i++][0] = '\0';
-			continue ;
+			j++;								// move to the next string inside argv
+			free(output[i]);					// free the empty string memory
+			continue ;							// skip incrementing [i] because we did not get any new argument this iteration 
 		}
-		values[i++] = next_word(user_input);
+		i++;
 	}
-	values[i] = NULL;
-	return (values);
+	output[i] = NULL;
+	return (output);
 }

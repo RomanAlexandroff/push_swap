@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 	//		2. while running, if a string contains multiple values devided
 	//			by SPACE, split them into separate strings
 	//		3. place everything into a char **array
-	argv = split_arguments(argv[1], argc--);			// drop the name of the program
+	argv = split_arguments((argv + 1), (argc - 1));			// drop the name of the program
 	
 	if (!argv)								// if malloc fails
 		free_and_exit(&a, argv + 1, argc);
