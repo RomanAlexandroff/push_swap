@@ -44,7 +44,6 @@ static char	*next_word(char *str)
 	return (next_word);
 }
 
-
 /*
  *	Counts the number of arguments in an array of strings
  *	no matter if arguments are located in their individual
@@ -85,10 +84,11 @@ static int	find_arguments(char **argv, int argc)
 }
 
 /*
- *	Takes one single string with multiple
- *	values inside and splits all the values
- *	into their individual strings. Returns
- *	as an array of strings
+ *	Takes one single string with multiple values
+ *	inside and splits all the values into their
+ *	individual strings. Adds NULL at the end of
+ *	the array for easier future parsing. Returns a
+ *	NULL-terminated array of \0-terminated strings.
 */
 char	**split_arguments(char **argv, int argc)
 {

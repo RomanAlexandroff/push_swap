@@ -12,44 +12,42 @@
 
 #include "push_swap.h"
 
+static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
+{
+	if (is_sorted(a))
+		return ;
+	if (get_stack_length(a) == 2)
+			return (swap_a(*a));
+	if (mode == SIMPLE_MODE)
+		simple_sort(*a, *b);				//TODO
+	else if (mode == MEDIUM_MODE)
+		medium_sort(*a, *b);				//TODO
+	else if (mode == COMPLEX_MODE)
+		complex_sort(*a, *b);				//TODO
+	else
+		adaptive_sort(*a, *b);				//TODO
+}
+
 int	main(int argc, char **argv)
 {
 	t_node	*a;
 	t_node	*b;
-	int		nodes_count;
 	t_mode	complexity_mode;
 	bool	bench_flag;	
 
 	a = NULL;
 	b = NULL;
-	bench_flag = false;
-	complexity_mode = ADAPTIVE_MODE;								// default mode
-	// Input validation (to the extend of current possibilities)
-	if (argc <= 1 || (argc == 2 && !argv[1]))
+	if (argc <= 1 || (argc == 2 && !argv[1])) 	// Input validation (to the extend of current possibilities)
 		return (EXIT_FAILURE);
-	
-	// Make sure all the given arguments are in their individual strings
-	//		1. run through all the arguments inside ARGV
-	//		2. while running, if a string contains multiple values devided
-	//			by SPACE, split them into separate strings
-	//		3. place everything into a char **array
-	argv = split_arguments((argv + 1), (argc - 1));			// drop the name of the program
-	
-	if (!argv)								// if malloc fails
+	argv = split_arguments(argv + 1, argc - 1);			// Make sure all the given arguments are in their individual strings
+	if (!argv)										// If malloc fails, free everything and exit with Error
 		free_and_exit(&a, argv + 1, argc);
-
-	set_flags(argv, &complexity_mode, &bench_flag);
-	create_stack_safely(&a, argv + 1, argc);
-	nodes_count = get_stack_length(a);
-	if (!is_sorted(a))
-	{
-		if (nodes_count == 2)
-			swap_a(&a);
-		else if (nodes_count == 3)
-			sort_three(&a);
-		else
-			sort_many(&a, &b);
-	}
+	if (!set_flags(argv, &complexity_mode, &bench_flag)) 	// if flags are incorrect, free everything and exit with Error
+		free_and_exit(&a, argv + 1, argc);
+	create_stack_safely(&a, argv + 1, argc);			// parse argv arguments into a doubly linked list
+	mode_dispatcher(complexity_mode, &a, &b);			// the main sorting work happens in here
+	if (bench_flag)
+		benchmark_mode(a, b);						//TODO
 	return (free_stack_mem(&a), EXIT_SUCCESS);
 }
 
