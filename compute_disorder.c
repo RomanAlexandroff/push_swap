@@ -12,7 +12,42 @@
 
 #include "push_swap.h"
 
-double	compute_disorder(t_node *a, int nodes_count)
+static void	put_float(int n)
+{
+	char	c;
+
+	if (n >= 10)
+		put_float(n / 10);
+	c = (n % 10) + '0';
+	write(1, &c, 1);
+}
+
+/* 
+ * Prints the disorder value as a percentage with two decimal digits.
+ * Value is rounded by converting the float into an integer. 
+*/
+
+void	print_disorder_percent(float disorder)
+{
+	int	nb;
+	int	integer;
+	int	decimal;
+
+	nb = (disorder * 10000) + 0.5;
+	integer = nb / 100;
+	decimal = nb % 100;
+	put_float(integer);
+	write(1, ".", 1);
+	put_float(decimal);
+	write(1, "%", 1);
+}
+
+/* 
+ * Computes how many pairs of nodes are in the wrong order.
+ * Returns the ratio between wrong pairs(mistakes) and total compared pairs. 
+*/
+
+float	compute_disorder(t_node *a, int nodes_count)
 {
 	t_node	*j;
 	long	total_pairs;
