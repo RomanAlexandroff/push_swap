@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42roma.it>      #+#  +:+       +#+        */
+/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026-03-13 13:33:08 by roaleksa          #+#    #+#             */
 /*   Updated: 2026/05/28 17:24:45 by ccrucian         ###   ########.fr       */
@@ -31,6 +31,14 @@ typedef struct s_node
 	bool			top_half_flag;
 	bool			next_to_solve;
 }				t_node;
+
+typedef enum e_mode
+{
+	SIMPLE_MODE,
+	MEDIUM_MODE,
+	COMPLEX_MODE,
+	ADAPTIVE_MODE,
+}			t_mode;
 
 char	**extract_values(char *user_input);
 void	create_stack_safely(t_node **a, char **argv, int argc);
