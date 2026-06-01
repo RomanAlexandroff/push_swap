@@ -10,9 +10,179 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "push_swap.h"
 
-void	simple_strategy(t_node **a, t_node **b)
+static void	move_to_top_b(t_node **stack_b, int pos) 			// potentially can be replaced with ensure_top() from sort_many_nodes.c
 {
+	int	size;
 
+	size = get_stack_length(*stack_b);
+	if (pos <= size / 2)
+	{
+		while (pos > 0)
+		{
+			rotate_b(stack_b);
+			pos--;
+		}
+	}
+	else
+	{
+		pos = size - pos;
+		while (pos > 0)
+		{
+			reverse_b(stack_b);
+			pos--;
+		}
+	}
+}
+
+static int	find_max_position(t_node *stack)
+{
+	int	max_index;
+	int	max_position;
+	int	position;
+
+	max_index = stack->index;
+	max_position = 0;
+	position = 0;
+	while (stack)
+	{
+		if (stack->index > max_index)
+		{
+			max_index = stack->index;
+			max_position = position;
+		}
+		position++;
+		stack = stack->node_after;
+	}
+	return (max_position);
+}
+
+static void	push_back_sorted(t_stack *a, t_stack *b)
+{
+	int	pos;
+
+	while (*b)
+	{
+		pos = find_max_position(b);					// DONE here in the file
+		move_to_top_b(b, pos);					// DONE here in the file
+		push_to_a(a, b);							// ORIGINAL from command_push.c
+	}
+}
+
+static void	move_to_top_a(t_stack *a, int pos) 			// potentially can be replaced with ensure_top() from sort_many_nodes.c
+{
+	if (pos >= 0)
+	{
+		while (pos--)
+			rotate_a(a);							// ORIGINAL from command_rotate.c
+	}
+	else
+	{
+		pos = -pos;
+		while (pos--)
+			reverse_a(a);							// ORIGINAL from command_reverse.c
+	}
+}
+
+static int	distance_from_bottom(t_node *stack, int min, int max)
+{
+	int		distance;
+	t_node	*bottom;
+
+	if (!stack)
+		return (-1);
+	bottom = stack;
+	while (bottom->node_after)
+		bottom = bottom->node_after;
+	distance = 0;
+	while (bottom)
+	{
+		if (bottom->index >= min && bottom->index <= max)
+			return (distance);
+		distance++;
+		bottom = bottom->node_before;
+	}
+	return (-1);
+}
+
+static int	distance_from_top(t_node *stack, int min, int max)
+{
+	int	distance;
+
+	distance = 0;
+	while (stack)
+	{
+		if (stack->index >= min && stack->index <= max)
+			return (distance);
+		distance++;
+		stack = stack->node_after;
+	}
+	return (-1);
+}
+
+static int	find_nearest_chunk_value(t_stack *a, int min, int max)
+{
+	int	top_dist;
+	int	bottom_dist;
+
+	top_dist = distance_from_top(a, min, max);						// DONE here in the file
+	bottom_dist = distance_from_bottom(a, min, max);					// DONE here in the file
+
+	if (top_dist <= bottom_dist)
+		return (top_dist);
+	return (-(bottom_dist));
+}
+
+static bool	contains_chunk_value(t_node *stack, int min, int max)
+{
+	while (stack)
+	{
+		if (stack->index >= min && stack->index <= max)
+			return (true);
+		stack = stack->node_after;
+	}
+	return (false);
+}
+
+static void	push_chunk(t_stack *a, t_stack *b, int min, int max)
+{
+	int	pos;
+	int	middle;
+
+	middle = (min + max) / 2;
+	while (contains_chunk_value(a, min, max))					// DONE here in the file
+	{
+		pos = find_nearest_chunk_value(a, min, max);				// DONE here in the file
+		move_to_top_a(a, pos);									// DONE here in the file
+		push_to_b(a, b);									// ORIGINAL from command_push.c
+		if ((*b)->index < middle)
+			rotate_b(b);									// ORIGINAL from command_rotate.c
+	}
+}
+
+void	medium_strategy(t_node **a, t_node **b)
+{
+	int	size;
+	int	chunk_count;
+	int	chunk_size;
+	int	chunk;
+	int	start;
+	int	end;
+
+	size = get_stack_length(a);							// ORIGINAL from stack_calculations.c
+	chunk_count = (int)sqrt(size);					// FROM A LIBRARY
+	chunk_size = size / chunk_count;
+	chunk = 0;
+	while (chunk < chunk_count)
+	{
+		start = chunk * chunk_size;
+		end = start + chunk_size - 1;
+		if (chunk == chunk_count - 1)
+			end = size - 1;
+		push_chunk(a, b, start, end);					// DONE here in the file
+		chunk++;
+	}
+	push_back_sorted(a, b);								// DONE here in the file
 }
