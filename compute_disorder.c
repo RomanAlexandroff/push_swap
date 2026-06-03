@@ -76,23 +76,3 @@ float	compute_disorder(t_node *a, int nodes_count)
 	disorder = (float)mistakes / total_pairs;
 	return (disorder);
 }
-
-int	main()
-{
-	print_disorder_percent(0.523);
-	write(1, "\n", 1);
-	print_disorder_percent(1);
-	write(1, "\n", 1);
-	print_disorder_percent(0);
-	write(1, "\n", 1);
-	print_disorder_percent(0.50);
-	write(1, "\n", 1);
-	print_disorder_percent(0.51);
-	write(1, "\n", 1);
-	print_disorder_percent(0.510);
-	write(1, "\n", 1);
-	print_disorder_percent(0.511);
-	write(1, "\n", 1);
-	return (0);
-
-}
