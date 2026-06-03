@@ -70,6 +70,6 @@ float	compute_disorder(t_node *a, int nodes_count)
 		}
 		a = a->node_after;
 	}
-	disorder = (double)mistakes / total_pairs;
+	disorder = (float)mistakes / total_pairs;
 	return (disorder);
 }
