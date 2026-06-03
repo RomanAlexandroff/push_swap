@@ -14,18 +14,18 @@
 
 static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 {
-	if (is_sorted(a))
+	if (is_sorted(*a))
 		return ;
-	if (get_stack_length(a) == 2)
-			return (swap_a(*a));
+	if (get_stack_length(*a) == 2)
+		return (swap_a(a));
 	if (mode == SIMPLE_MODE)
-		simple_sort(*a, *b);				//TODO
+		simple_strategy(a, b);
 	else if (mode == MEDIUM_MODE)
-		medium_sort(*a, *b);				//TODO
+		medium_sort(a, b);
 	else if (mode == COMPLEX_MODE)
-		complex_sort(*a, *b);				//TODO
+		write(1, "\n  - - Complex Sort has been trigerred\n\n", 41);		//complex_sort(a, b);				//TODO
 	else
-		adaptive_sort(*a, *b);				//TODO
+		write(1, "\n  - - Adaptive Sort has been trigerred\n\n", 42);		//adaptive_sort(a, b);				//TODO
 }
 
 int	main(int argc, char **argv)
@@ -41,10 +41,10 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	argv = split_arguments(argv + 1, argc - 1);			// Make sure all the given arguments are in their individual strings
 	if (!argv)										// If malloc fails, free everything and exit with Error
-		free_and_exit(&a, argv + 1, argc);
+		free_and_exit(&a, argv, argc);
 	if (!set_flags(argv, &complexity_mode, &bench_flag)) 	// if flags are incorrect, free everything and exit with Error
-		free_and_exit(&a, argv + 1, argc);
-	create_stack_safely(&a, argv + 1, argc);			// parse argv arguments into a doubly linked list
+		free_and_exit(&a, argv, argc);
+	create_stack_safely(&a, argv, argc);			// parse argv arguments into a doubly linked list
 	mode_dispatcher(complexity_mode, &a, &b);			// the main sorting work happens in here
 	if (bench_flag)
 		benchmark_mode(a, b);						//TODO

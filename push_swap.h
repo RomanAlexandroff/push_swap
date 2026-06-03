@@ -19,11 +19,13 @@
 # include <unistd.h>
 # include <stddef.h>
 # include <stdio.h>
+# include <math.h>
 
 typedef struct s_node
 {
 	int				value;
 	int				node_position;
+	int				index;
 	struct s_node	*node_before;
 	struct s_node	*node_after;
 	struct s_node	*destination;
@@ -40,7 +42,7 @@ typedef enum e_mode
 	ADAPTIVE_MODE,
 }			t_mode;
 
-char	**extract_values(char *user_input);
+void	benchmark_mode(t_node *a, t_node *b);
 void	create_stack_safely(t_node **a, char **argv, int argc);
 int		characters_check(char *input);
 int		duplicates_check(t_node *a, int input);
@@ -54,11 +56,14 @@ int		get_stack_length(t_node *stack);
 double	compute_disorder(t_node *a, int nodes_count);
 bool	is_sorted(t_node *stack);
 void	position_update(t_node *stack);
+bool	set_flags(char **argv, t_mode *complexity_mode, bool *bench_flag);
 void	solving_cost_update(t_node *a, t_node *b);
+char	**split_arguments(char **argv, int argc);
 void	next_to_solve_update(t_node *b);
 void	update_nodes(t_node *a, t_node *b);
 void	ensure_top(t_node **stack, t_node *node, char name);
 void	simple_strategy(t_node **a, t_node **b);
+void	medium_sort(t_node **a, t_node **b);
 void	sort_three(t_node **a);
 void	sort_many(t_node **a, t_node **b);
 void	push_to_a(t_node **a, t_node **b);

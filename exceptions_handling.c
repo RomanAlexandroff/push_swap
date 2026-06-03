@@ -50,12 +50,12 @@ void	free_argv_mem(char **argv)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	if (argv == NULL || *argv == NULL)
 		return ;
 	while (argv[i])
 		free(argv[i++]);
-	free(argv - 1);
+	free(argv);
 }
 
 void	free_stack_mem(t_node **stack)
