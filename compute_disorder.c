@@ -38,7 +38,10 @@ void	print_disorder_percent(float disorder)
 	decimal = nb % 100;
 	put_float(integer);
 	write(1, ".", 1);
-	put_float(decimal);
+	if (decimal == 0)
+		write(1, "00", 2);
+	else
+		put_float(decimal);
 	write(1, "%", 1);
 }
 
@@ -72,4 +75,24 @@ float	compute_disorder(t_node *a, int nodes_count)
 	}
 	disorder = (float)mistakes / total_pairs;
 	return (disorder);
+}
+
+int	main()
+{
+	print_disorder_percent(0.523);
+	write(1, "\n", 1);
+	print_disorder_percent(1);
+	write(1, "\n", 1);
+	print_disorder_percent(0);
+	write(1, "\n", 1);
+	print_disorder_percent(0.50);
+	write(1, "\n", 1);
+	print_disorder_percent(0.51);
+	write(1, "\n", 1);
+	print_disorder_percent(0.510);
+	write(1, "\n", 1);
+	print_disorder_percent(0.511);
+	write(1, "\n", 1);
+	return (0);
+
 }
