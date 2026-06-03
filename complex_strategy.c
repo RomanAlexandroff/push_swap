@@ -75,6 +75,7 @@ void	complex_strategy(t_node **a, t_node **b)
 	int	length;
 	int	max_bits;
 	int	i;
+	int	bit_read;
 
 	length = get_stack_length(*a);
 	assign_index(*a);
