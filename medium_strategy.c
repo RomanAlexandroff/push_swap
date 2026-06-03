@@ -10,19 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include "push_swap.h"
 
-static void	move_to_top_b(t_node **stack_b, int pos) 			// potentially can be replaced with ensure_top() from sort_many_nodes.c
+static void	move_to_top_b(t_node **b, int pos) 			// potentially can be replaced with ensure_top() from sort_many_nodes.c
 {
 	int	size;
 
-	size = get_stack_length(*stack_b);
+	size = get_stack_length(*b);
 	if (pos <= size / 2)
 	{
 		while (pos > 0)
 		{
-			rotate_b(stack_b);
+			rotate_b(b);
 			pos--;
 		}
 	}
@@ -31,7 +30,7 @@ static void	move_to_top_b(t_node **stack_b, int pos) 			// potentially can be re
 		pos = size - pos;
 		while (pos > 0)
 		{
-			reverse_b(stack_b);
+			reverse_b(b);
 			pos--;
 		}
 	}
@@ -59,19 +58,19 @@ static int	find_max_position(t_node *stack)
 	return (max_position);
 }
 
-static void	push_back_sorted(t_stack *a, t_stack *b)
+static void	push_back_sorted(t_node **a, t_node **b)
 {
 	int	pos;
 
 	while (*b)
 	{
-		pos = find_max_position(b);					// DONE here in the file
+		pos = find_max_position(*b);					// DONE here in the file
 		move_to_top_b(b, pos);					// DONE here in the file
 		push_to_a(a, b);							// ORIGINAL from command_push.c
 	}
 }
 
-static void	move_to_top_a(t_stack *a, int pos) 			// potentially can be replaced with ensure_top() from sort_many_nodes.c
+static void	move_to_top_a(t_node **a, int pos) 			// potentially can be replaced with ensure_top() from sort_many_nodes.c
 {
 	if (pos >= 0)
 	{
@@ -122,7 +121,7 @@ static int	distance_from_top(t_node *stack, int min, int max)
 	return (-1);
 }
 
-static int	find_nearest_chunk_value(t_stack *a, int min, int max)
+static int	find_nearest_chunk_value(t_node *a, int min, int max)
 {
 	int	top_dist;
 	int	bottom_dist;
@@ -146,15 +145,15 @@ static bool	contains_chunk_value(t_node *stack, int min, int max)
 	return (false);
 }
 
-static void	push_chunk(t_stack *a, t_stack *b, int min, int max)
+static void	push_chunk(t_node **a, t_node **b, int min, int max)
 {
 	int	pos;
 	int	middle;
 
 	middle = (min + max) / 2;
-	while (contains_chunk_value(a, min, max))					// DONE here in the file
+	while (contains_chunk_value(*a, min, max))					// DONE here in the file
 	{
-		pos = find_nearest_chunk_value(a, min, max);				// DONE here in the file
+		pos = find_nearest_chunk_value(*a, min, max);				// DONE here in the file
 		move_to_top_a(a, pos);									// DONE here in the file
 		push_to_b(a, b);									// ORIGINAL from command_push.c
 		if ((*b)->index < middle)
@@ -162,7 +161,29 @@ static void	push_chunk(t_stack *a, t_stack *b, int min, int max)
 	}
 }
 
-void	medium_strategy(t_node **a, t_node **b)
+static void	assign_sorting_rank(t_node *stack)
+{
+	t_node	*current;
+	t_node	*compare;
+	int		count;
+
+	current = stack;
+	while (current)
+	{
+		count = 0;
+		compare = stack;
+		while (compare)
+		{
+			if (compare->value < current->value)
+				count++;
+			compare = compare->node_after;
+		}
+		current->index = count;
+		current = current->node_after;
+	}
+}
+
+void	medium_sort(t_node **a, t_node **b)
 {
 	int	size;
 	int	chunk_count;
@@ -171,7 +192,8 @@ void	medium_strategy(t_node **a, t_node **b)
 	int	start;
 	int	end;
 
-	size = get_stack_length(a);							// ORIGINAL from stack_calculations.c
+	assign_sorting_rank(*a);								// DONE here in the file
+	size = get_stack_length(*a);							// ORIGINAL from stack_calculations.c
 	chunk_count = (int)sqrt(size);					// FROM A LIBRARY
 	chunk_size = size / chunk_count;
 	chunk = 0;
