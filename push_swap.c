@@ -23,7 +23,7 @@ static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 	else if (mode == MEDIUM_MODE)
 		medium_sort(a, b);
 	else if (mode == COMPLEX_MODE)
-		write(1, "\n  - - Complex Sort has been trigerred\n\n", 41);		//complex_sort(a, b);				//TODO
+		complex_strategy(a, b);				//TODO
 	else
 		write(1, "\n  - - Adaptive Sort has been trigerred\n\n", 42);		//adaptive_sort(a, b);				//TODO
 }
