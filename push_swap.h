@@ -24,6 +24,7 @@ typedef struct s_node
 {
 	int				value;
 	int				node_position;
+	int				index;
 	struct s_node	*node_before;
 	struct s_node	*node_after;
 	struct s_node	*destination;
@@ -62,6 +63,7 @@ void	ensure_top(t_node **stack, t_node *node, char name);
 void	simple_strategy(t_node **a, t_node **b);
 void	sort_three(t_node **a);
 void	sort_many(t_node **a, t_node **b);
+void	complex_strategy(t_node **a, t_node **b);
 void	push_to_a(t_node **a, t_node **b);
 void	push_to_b(t_node **a, t_node **b);
 void	swap_a(t_node **a);
