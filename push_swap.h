@@ -19,7 +19,6 @@
 # include <unistd.h>
 # include <stddef.h>
 # include <stdio.h>
-# include <math.h>
 
 typedef struct s_node
 {
@@ -43,12 +42,12 @@ typedef enum e_mode
 }			t_mode;
 
 void	benchmark_mode(t_node *a, t_node *b);
-void	create_stack_safely(t_node **a, char **argv, int argc);
+void	create_stack_safely(t_node **a, char **argv);
 int		characters_check(char *input);
 int		duplicates_check(t_node *a, int input);
 void	free_argv_mem(char **argv);
 void	free_stack_mem(t_node **stack);
-void	free_and_exit(t_node **a, char **argv, int argc);
+void	free_and_exit(t_node **a, char **argv);
 t_node	*get_last_node(t_node *node);
 t_node	*get_lowest_value(t_node *stack);
 t_node	*find_next_to_solve(t_node *stack);

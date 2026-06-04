@@ -42,9 +42,9 @@ test:
 	@echo "\nRunning Checker:"
 # use chmode on the program file if it fails to run
 ifeq ($(UNAME),Darwin)
-	@./$(NAME) $(ARG) | ../checker_Mac $(ARG)
+	@./$(NAME) --medium $(ARG) | ../checker_Mac $(ARG)
 else
-	@./$(NAME) $(ARG) | ../checker_linux $(ARG)
+	@./$(NAME) --medium $(ARG) | ../checker_linux $(ARG)
 endif
 	@$(RM) $(NAME)
 	@echo "\nTest is concluded.\n"
@@ -54,7 +54,7 @@ valgrind:
 ifeq ($(UNAME),Darwin)
 	@echo "Using Leaks for memory checking."
 	@$(CC) $(CFLAGS) $(SRCS) -g -o $(NAME)
-	@leaks --atExit -- ./$(NAME) $(ARG)
+	@leaks --atExit -- ./$(NAME) --medium $(ARG)
 	@$(RM) $(NAME)
 	@$(RM) -r $(NAME).dSYM
 else
@@ -242,4 +242,4 @@ fclean : clean
 re : fclean all
 	@echo "Rebuilding the project is complete."
 
-.PHONY: all norm test valgrind gdb git clean fclean re
+.PHONY: all norm test valgrind gdb git update clean fclean re
