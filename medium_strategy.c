@@ -183,6 +183,32 @@ static void	assign_sorting_rank(t_node *stack)
 	}
 }
 
+static int	ft_sqrt(int nb)
+{
+	int	low;
+	int	high;
+	int	mid;
+	int	ans;
+
+	if (nb <= 0)
+		return (0);
+	low = 1;
+	high = nb;
+	ans = 1;
+	while (low <= high)
+	{
+		mid = (low + high) / 2;
+		if ((long)mid * mid <= nb)
+		{
+			ans = mid;
+			low = mid + 1;
+		}
+		else
+			high = mid - 1;
+	}
+	return (ans);
+}
+
 void	medium_sort(t_node **a, t_node **b)
 {
 	int	size;
@@ -194,7 +220,9 @@ void	medium_sort(t_node **a, t_node **b)
 
 	assign_sorting_rank(*a);								// DONE here in the file
 	size = get_stack_length(*a);							// ORIGINAL from stack_calculations.c
-	chunk_count = (int)sqrt(size);					// FROM A LIBRARY
+	chunk_count = ft_sqrt(size);					// DONE here in the file
+	if (chunk_count == 0)
+		chunk_count = 1;
 	chunk_size = size / chunk_count;
 	chunk = 0;
 	while (chunk < chunk_count)
