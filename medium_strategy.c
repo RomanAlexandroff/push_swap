@@ -131,7 +131,7 @@ static int	find_nearest_chunk_value(t_node *a, int min, int max)
 
 	if (top_dist <= bottom_dist)
 		return (top_dist);
-	return (-(bottom_dist));
+	return (-(bottom_dist + 1));
 }
 
 static bool	contains_chunk_value(t_node *stack, int min, int max)
