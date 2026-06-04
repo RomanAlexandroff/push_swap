@@ -1,11 +1,11 @@
 
 NAME = push_swap
 
-SRCS = push_swap.c command_push.c command_reverse.c\
-		command_rotate.c command_swap.c create_stack.c\
-		exceptions_handling.c extract_values.c\
-		sort_many_nodes.c sort_three_nodes.c\
-		stack_calculations.c update_nodes.c\
+SRCS = push_swap.c benchmark_mode.c command_push.c command_reverse.c\
+		command_rotate.c command_swap.c compute_disorder.c create_stack.c\
+		exceptions_handling.c flags_handling.c medium_strategy.c\
+		simple_strategy.c sort_many_nodes.c sort_three_nodes.c\
+		split_arguments.c stack_calculations.c update_nodes.c\
 		complex_strategy.c
 OBJS = $(SRCS:.c=.o)
 
@@ -43,9 +43,9 @@ test:
 	@echo "\nRunning Checker:"
 # use chmode on the program file if it fails to run
 ifeq ($(UNAME),Darwin)
-	@./$(NAME) $(ARG) | ../checker_Mac $(ARG)
+	@./$(NAME) --medium $(ARG) | ../checker_Mac $(ARG)
 else
-	@./$(NAME) $(ARG) | ../checker_linux $(ARG)
+	@./$(NAME) --medium $(ARG) | ../checker_linux $(ARG)
 endif
 	@$(RM) $(NAME)
 	@echo "\nTest is concluded.\n"
@@ -55,7 +55,7 @@ valgrind:
 ifeq ($(UNAME),Darwin)
 	@echo "Using Leaks for memory checking."
 	@$(CC) $(CFLAGS) $(SRCS) -g -o $(NAME)
-	@leaks --atExit -- ./$(NAME) $(ARG)
+	@leaks --atExit -- ./$(NAME) --medium $(ARG)
 	@$(RM) $(NAME)
 	@$(RM) -r $(NAME).dSYM
 else
@@ -243,4 +243,4 @@ fclean : clean
 re : fclean all
 	@echo "Rebuilding the project is complete."
 
-.PHONY: all norm test valgrind gdb git clean fclean re
+.PHONY: all norm test valgrind gdb git update clean fclean re

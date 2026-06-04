@@ -71,7 +71,7 @@ static long	ft_atod(const char *str)
  *	Can skip strings which start with "--"
  *	in order not to parse flags by accident
 */
-void	create_stack_safely(t_node **a, char **argv, int argc)
+void	create_stack_safely(t_node **a, char **argv)
 {
 	long	value;
 	int		i;
@@ -83,15 +83,14 @@ void	create_stack_safely(t_node **a, char **argv, int argc)
 		if (argv[i][0] == '-' && argv[i][1] == '-')
 			continue ;
 		if (!characters_check(argv[i]))
-			free_and_exit(a, argv, argc);
+			free_and_exit(a, argv);
 		value = ft_atod(argv[i]);
 		if (value < INT_MIN || value > INT_MAX)
-			free_and_exit(a, argv, argc);
+			free_and_exit(a, argv);
 		if (!duplicates_check(*a, (int)value))
-			free_and_exit(a, argv, argc);
+			free_and_exit(a, argv);
 		if (!add_new_node(a, (int)value))
-			free_and_exit(a, argv, argc);
+			free_and_exit(a, argv);
 	}
-	if (argc == 2)
-		free_argv_mem(argv);
+	free_argv_mem(argv);
 }

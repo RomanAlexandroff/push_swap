@@ -41,13 +41,13 @@ typedef enum e_mode
 	ADAPTIVE_MODE,
 }			t_mode;
 
-char	**extract_values(char *user_input);
-void	create_stack_safely(t_node **a, char **argv, int argc);
+void	benchmark_mode(t_node *a, t_node *b);
+void	create_stack_safely(t_node **a, char **argv);
 int		characters_check(char *input);
 int		duplicates_check(t_node *a, int input);
 void	free_argv_mem(char **argv);
 void	free_stack_mem(t_node **stack);
-void	free_and_exit(t_node **a, char **argv, int argc);
+void	free_and_exit(t_node **a, char **argv);
 t_node	*get_last_node(t_node *node);
 t_node	*get_lowest_value(t_node *stack);
 t_node	*find_next_to_solve(t_node *stack);
@@ -56,11 +56,14 @@ void	print_disorder_percent(float disorder);
 float	compute_disorder(t_node *a, int nodes_count);
 bool	is_sorted(t_node *stack);
 void	position_update(t_node *stack);
+bool	set_flags(char **argv, t_mode *complexity_mode, bool *bench_flag);
 void	solving_cost_update(t_node *a, t_node *b);
+char	**split_arguments(char **argv, int argc);
 void	next_to_solve_update(t_node *b);
 void	update_nodes(t_node *a, t_node *b);
 void	ensure_top(t_node **stack, t_node *node, char name);
 void	simple_strategy(t_node **a, t_node **b);
+void	medium_sort(t_node **a, t_node **b);
 void	sort_three(t_node **a);
 void	sort_many(t_node **a, t_node **b);
 void	complex_strategy(t_node **a, t_node **b);

@@ -83,6 +83,17 @@ static int	find_arguments(char **argv, int argc)
 	return (args_count);
 }
 
+static char	**cleanup_output(char **output, int count)
+{
+	while (count > 0)
+	{
+		free(output[count - 1]);
+		count--;
+	}
+	free(output);
+	return (NULL);
+}
+
 /*
  *	Takes one single string with multiple values
  *	inside and splits all the values into their
@@ -109,8 +120,8 @@ char	**split_arguments(char **argv, int argc)
 	{
 		output[i] = next_word(argv[j]);
 		if (!output[i])
-			return (NULL);
-		if (output[i][0] == '\0')			// if next_word() did not find more words in a current string, then...
+			return (cleanup_output(output, i));
+		if (output[i][0] == '\0')
 		{
 			j++;								// move to the next string inside argv
 			free(output[i]);					// free the empty string memory
