@@ -43,7 +43,7 @@ static void	assign_index(t_node *stack)
  * the biggest index in the stack. 
 */
 
-static int	get_max_bits(t_node *stack)
+static int	get_max_bits(t_node *a)
 {
 	int	max_bits;
 	int	max_index;
