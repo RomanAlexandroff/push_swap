@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_push.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42roma.it>      #+#  +:+       +#+        */
+/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-13 13:32:17 by roaleksa          #+#    #+#             */
-/*   Updated: 2026-03-13 13:32:17 by roaleksa         ###   ########.fr       */
+/*   Created: 2026/03/13 13:32:17 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/06/05 14:46:39 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,15 @@ static void	push(t_node **from, t_node **to)
 void	push_to_a(t_node **a, t_node **b)
 {
 	push(b, a);
+	if (*a && (*a)->bench)
+		(*a)->bench->pa++;
 	write(1, "pa\n", 3);
 }
 
 void	push_to_b(t_node **a, t_node **b)
 {
 	push(a, b);
+	if (*b && (*b)->bench)
+		(*b)->bench->pb++;
 	write(1, "pb\n", 3);
 }

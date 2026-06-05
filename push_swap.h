@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-13 13:33:08 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/05/28 17:24:45 by ccrucian         ###   ########.fr       */
+/*   Created: 2026/03/13 13:33:08 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/06/05 15:32:16 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_bench
 	unsigned int    rra;
 	unsigned int    rrb;
 	unsigned int    rrr;
-	unsigned int    total_ops;
 	float           disorder_percent;
 }               t_bench;
 
@@ -62,8 +61,9 @@ typedef enum e_mode
 	ADAPTIVE_MODE,
 }			t_mode;
 
-void	benchmark_mode(t_node *a, t_node *b, t_node **bench);
-void	create_stack_safely(t_node **a, char **argv);
+t_bench	*bench_init(bool bench_flag);
+void	benchmark_mode(t_bench **bench);
+void	create_stack_safely(t_node **a, char **argv, t_bench *bench);
 int		characters_check(char *input);
 int		duplicates_check(t_node *a, int input);
 void	free_argv_mem(char **argv);

@@ -6,39 +6,11 @@
 /*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:00 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/05/28 15:09:30 by roaleksa         ###   ########.fr       */
+/*   Updated: 2026/06/05 15:28:52 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static t_bench	*bench_init(bool bench_flag)
-{
-	t_bench	*bench;
-
-	if (!bench_flag)
-		return (NULL);
-	bench = malloc(sizeof *bench);
-	if (!bench)
-		return (NULL);
-	bench->enabled = true;
-	bench->strategy_name = NULL;
-	bench->complexity = NULL;
-	bench->sa = 0;
-	bench->sb = 0;
-	bench->ss = 0;
-	bench->pa = 0;
-	bench->pb = 0;
-	bench->ra = 0;
-	bench->rb = 0;
-	bench->rr = 0;
-	bench->rra = 0;
-	bench->rrb = 0;
-	bench->rrr = 0;
-	bench->total_ops = 0;
-	bench->disorder_percent = 00.00f;
-	return (bench);
-}
 
 static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 {
@@ -76,9 +48,9 @@ int	main(int argc, char **argv)
 	bench = bench_init(bench_flag);
 	if (bench_flag && !bench)							// if malloc fails for bench
 		free_and_exit(&a, argv);
-	create_stack_safely(&a, argv);						// parse argv arguments into a doubly linked list
+	create_stack_safely(&a, argv, bench);						// parse argv arguments into a doubly linked list
 	mode_dispatcher(complexity_mode, &a, &b);			// the main sorting work happens in here
 	if (bench_flag)
-		benchmark_mode(a, b, &bench);                        //TODO
+		benchmark_mode(&bench);                        //TODO
 	return (free_stack_mem(&a), EXIT_SUCCESS);
 }

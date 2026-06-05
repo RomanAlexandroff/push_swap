@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_many_nodes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42roma.it>      #+#  +:+       +#+        */
+/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-13 13:33:14 by roaleksa          #+#    #+#             */
-/*   Updated: 2026-03-13 13:33:14 by roaleksa         ###   ########.fr       */
+/*   Created: 2026/03/13 13:33:14 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/06/05 15:21:57 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
