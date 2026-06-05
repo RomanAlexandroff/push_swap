@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:00 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/05 12:18:14 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/05 12:19:12 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 	else if (mode == COMPLEX_MODE)
 		complex_strategy(a, b);
 	else
-		adaptive_strategy(a, b, get_stack_lenght(*a));
+		adaptive_strategy(a, b, get_stack_length(*a));
 }
 
 int	main(int argc, char **argv)
