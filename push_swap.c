@@ -6,7 +6,7 @@
 /*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:00 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/05 15:28:52 by roaleksa         ###   ########.fr       */
+/*   Updated: 2026/06/05 16:09:16 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 	else if (mode == COMPLEX_MODE)
 		complex_strategy(a, b);
 	else
-		write(1, "\n  - - Adaptive Sort has been trigerred\n\n", 42);		//adaptive_sort(a, b);				//TODO
+		sort_many(a, b);//write(1, "\n  - - Adaptive Sort has been trigerred\n\n", 42);		//adaptive_sort(a, b);				//TODO
 }
 
 int	main(int argc, char **argv)
@@ -51,6 +51,6 @@ int	main(int argc, char **argv)
 	create_stack_safely(&a, argv, bench);						// parse argv arguments into a doubly linked list
 	mode_dispatcher(complexity_mode, &a, &b);			// the main sorting work happens in here
 	if (bench_flag)
-		benchmark_mode(&bench);                        //TODO
+		benchmark_mode(bench);
 	return (free_stack_mem(&a), EXIT_SUCCESS);
 }

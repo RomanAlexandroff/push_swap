@@ -62,7 +62,7 @@ else
 	@echo "Using Valgrind for memory checking."
 	@$(CC) $(CFLAGS) $(SRCS) -g -o $(NAME)
 	@valgrind --leak-check=full --show-leak-kinds=all \
-		--track-origins=yes --track-fds=yes --verbose ./$(NAME) $(ARG)
+		--track-origins=yes --track-fds=yes --verbose ./$(NAME) --medium --bench $(ARG)
 	@$(RM) $(NAME)
 endif
 

@@ -6,7 +6,7 @@
 /*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:08 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/05 15:32:16 by roaleksa         ###   ########.fr       */
+/*   Updated: 2026/06/05 15:51:27 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef enum e_mode
 }			t_mode;
 
 t_bench	*bench_init(bool bench_flag);
-void	benchmark_mode(t_bench **bench);
+void	benchmark_mode(t_bench *bench);
 void	create_stack_safely(t_node **a, char **argv, t_bench *bench);
 int		characters_check(char *input);
 int		duplicates_check(t_node *a, int input);

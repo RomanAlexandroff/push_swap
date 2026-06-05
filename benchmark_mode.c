@@ -6,7 +6,7 @@
 /*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 18:22:25 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/05 15:35:24 by roaleksa         ###   ########.fr       */
+/*   Updated: 2026/06/05 15:52:03 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ t_bench	*bench_init(bool bench_flag)
 	return (bench);
 }
 
-void	benchmark_mode(t_bench **bench)
+void	benchmark_mode(t_bench *bench)
 {
 	int total_ops;
 
-	total_ops = (*bench)->pa + (*bench)->pb +
-		(*bench)->sa + (*bench)->sb + (*bench)->ss +
-		(*bench)->ra + (*bench)->rb + (*bench)->rr +
-		(*bench)->rra + (*bench)->rrb + (*bench)->rrr;
+	total_ops = bench->pa + bench->pb +
+		bench->sa + bench->sb + bench->ss +
+		bench->ra + bench->rb + bench->rr +
+		bench->rra + bench->rrb + bench->rrr;
 	printf("\nBENCHMARK MODE\nTotal steps: %d\n", total_ops);
-//	free(bench);
+	free(bench);
 }
