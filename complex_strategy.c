@@ -17,7 +17,6 @@
  * on the relative order of its value, in order to compress
  * the values in an easier way to process them.
  */
-
 static void	assign_index(t_node *stack)
 {
 	t_node	*current;
@@ -42,7 +41,6 @@ static void	assign_index(t_node *stack)
  * Calculate the maximum number of bits needed to represent 
  * the biggest index in the stack. 
 */
-
 static int	get_max_bits(t_node *a)
 {
 	int	max_bits;
@@ -69,7 +67,6 @@ static int	get_max_bits(t_node *a)
  * Each node is indexed according to its relative order,
  * then elements are sorted bit by bit using two stacks.
  */
-
 void	complex_strategy(t_node **a, t_node **b)
 {
 	int	length;

@@ -20,6 +20,26 @@
 # include <stddef.h>
 # include <stdio.h>
 
+typedef struct s_bench
+{
+	bool            enabled;
+	const char      *strategy_name;
+	const char      *complexity;
+	unsigned int    sa;
+	unsigned int    sb;
+	unsigned int    ss;
+	unsigned int    pa;
+	unsigned int    pb;
+	unsigned int    ra;
+	unsigned int    rb;
+	unsigned int    rr;
+	unsigned int    rra;
+	unsigned int    rrb;
+	unsigned int    rrr;
+	unsigned int    total_ops;
+	float           disorder_percent;
+}               t_bench;
+
 typedef struct s_node
 {
 	int				value;
@@ -28,10 +48,11 @@ typedef struct s_node
 	struct s_node	*node_before;
 	struct s_node	*node_after;
 	struct s_node	*destination;
+	t_bench			*bench;
 	int				solving_cost;
 	bool			top_half_flag;
 	bool			next_to_solve;
-}				t_node;
+}                t_node;
 
 typedef enum e_mode
 {
@@ -41,7 +62,7 @@ typedef enum e_mode
 	ADAPTIVE_MODE,
 }			t_mode;
 
-void	benchmark_mode(t_node *a, t_node *b);
+void	benchmark_mode(t_node *a, t_node *b, t_node **bench);
 void	create_stack_safely(t_node **a, char **argv);
 int		characters_check(char *input);
 int		duplicates_check(t_node *a, int input);

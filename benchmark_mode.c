@@ -12,9 +12,11 @@
 
 #include "push_swap.h"
 
-void	benchmark_mode(t_node *a, t_node *b)
+void	benchmark_mode(t_node *a, t_node *b, t_node **bench)
 {
 	(void)a;
 	(void)b;
+	(void)bench;
 	write(1, "\n\nBENCHMARK MODE HAS BEEN TRIGERRED\n\n", 37);
+//	free(bench);
 }
