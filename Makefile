@@ -6,7 +6,7 @@ SRCS = push_swap.c benchmark_mode.c command_push.c command_reverse.c\
 		exceptions_handling.c flags_handling.c medium_strategy.c\
 		simple_strategy.c sort_many_nodes.c sort_three_nodes.c\
 		split_arguments.c stack_calculations.c update_nodes.c\
-		complex_strategy.c
+		complex_strategy.c adaptive_strategy.c
 OBJS = $(SRCS:.c=.o)
 
 ARG ?= "4 67 3 87 23 -234"
