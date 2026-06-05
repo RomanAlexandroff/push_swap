@@ -55,7 +55,7 @@ float	compute_disorder(t_node *a, int nodes_count)
 	t_node	*j;
 	long	total_pairs;
 	long	mistakes;
-	double	disorder;
+	float	disorder;
 
 	if (!a || nodes_count <= 1)
 		return (0.0);
