@@ -6,11 +6,25 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:00 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/05 12:19:12 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/05 12:24:04 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	adaptive_strategy(t_node **a, t_node **b, int nodes_count)
+{
+	float	disorder;
+
+	disorder = compute_disorder(*a, nodes_count);
+	if (disorder < 0.2)
+		simple_strategy(a, b);
+	else if (disorder >= 0.2 && disorder < 0.5)
+		medium_sort(a, b);
+	else if (disorder >= 0.5)
+		complex_strategy(a, b);
+	return ;
+}
 
 static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 {
