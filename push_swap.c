@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:00 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/05/28 15:09:30 by roaleksa         ###   ########.fr       */
+/*   Updated: 2026/06/05 12:18:14 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 	else if (mode == MEDIUM_MODE)
 		medium_sort(a, b);
 	else if (mode == COMPLEX_MODE)
-		complex_strategy(a, b);				//TODO
+		complex_strategy(a, b);
 	else
-		write(1, "\n  - - Adaptive Sort has been trigerred\n\n", 42);		//adaptive_sort(a, b);				//TODO
+		adaptive_strategy(a, b, get_stack_lenght(*a));
 }
 
 int	main(int argc, char **argv)
