@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by roaleksa.*
+*This project has been created as part of the 42 curriculum by ccrucian and roaleksa.*
 
 # Push Swap
 
