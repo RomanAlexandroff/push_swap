@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complex_strategy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccrucian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 16:00:07 by ccrucian          #+#    #+#             */
-/*   Updated: 2026/05/28 17:12:19 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/05 13:16:43 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ static int	get_max_bits(t_node *a)
 	int	max_bits;
 	int	max_index;
 
-	max_index = a->index;
-	max_bits = 1;
+	max_index = 0;
 	while (a)
 	{
 		if (a->index > max_index)
 			max_index = a->index;
 		a = a->node_after;
 	}
+	max_bits = 0;
 	while (max_index > 0)
 	{
 		max_index = max_index / 2;
