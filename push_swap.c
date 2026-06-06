@@ -17,11 +17,11 @@ void	adaptive_strategy(t_node **a, t_node **b, int nodes_count)
 	float	disorder;
 
 	disorder = compute_disorder(*a, nodes_count);
-	if (disorder < 0.2)
+	if (disorder < 0.2f)
 		simple_strategy(a, b);
-	else if (disorder >= 0.2 && disorder < 0.5)
+	else if (disorder >= 0.2f && disorder < 0.5f)
 		medium_sort(a, b);
-	else if (disorder >= 0.5)
+	else if (disorder >= 0.5f)
 		complex_strategy(a, b);
 	return ;
 }
