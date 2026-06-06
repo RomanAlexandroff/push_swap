@@ -41,7 +41,7 @@ void	push_to_a(t_node **a, t_node **b)
 	push(b, a);
 	if (*a && (*a)->bench)
 		(*a)->bench->pa++;
-	write(1, "pa\n", 3);
+	write(FD_STDOUT, "pa\n", 3);
 }
 
 void	push_to_b(t_node **a, t_node **b)
@@ -49,5 +49,5 @@ void	push_to_b(t_node **a, t_node **b)
 	push(a, b);
 	if (*b && (*b)->bench)
 		(*b)->bench->pb++;
-	write(1, "pb\n", 3);
+	write(FD_STDOUT, "pb\n", 3);
 }

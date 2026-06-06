@@ -74,6 +74,7 @@ void	complex_strategy(t_node **a, t_node **b)
 	int	i;
 	int	bit_read;
 
+	set_benchmark(a, "Complex", "O(n log n)", SKIP_DISORDER);
 	length = get_stack_length(*a);
 	assign_index(*a);
 	max_bits = get_max_bits(*a);

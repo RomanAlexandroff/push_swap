@@ -37,7 +37,7 @@ void	swap_a(t_node **a)
 	swap(a);
 	if (*a && (*a)->bench)
 		(*a)->bench->sa++;
-	write(1, "sa\n", 3);
+	write(FD_STDOUT, "sa\n", 3);
 }
 
 void	swap_b(t_node **b)
@@ -45,7 +45,7 @@ void	swap_b(t_node **b)
 	swap(b);
 	if (*b && (*b)->bench)
 		(*b)->bench->sb++;
-	write(1, "sb\n", 3);
+	write(FD_STDOUT, "sb\n", 3);
 }
 
 void	swap_both(t_node **a, t_node **b)
@@ -54,5 +54,5 @@ void	swap_both(t_node **a, t_node **b)
 	swap(b);
 	if (*a && (*a)->bench)
 		(*a)->bench->ss++;
-	write(1, "ss\n", 3);
+	write(FD_STDOUT, "ss\n", 3);
 }

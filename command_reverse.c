@@ -33,7 +33,7 @@ void	reverse_a(t_node **a)
 	reverse(a);
 	if (*a && (*a)->bench)
 		(*a)->bench->rra++;
-	write(1, "rra\n", 4);
+	write(FD_STDOUT, "rra\n", 4);
 }
 
 void	reverse_b(t_node **b)
@@ -41,7 +41,7 @@ void	reverse_b(t_node **b)
 	reverse(b);
 	if (*b && (*b)->bench)
 		(*b)->bench->rrb++;
-	write(1, "rrb\n", 4);
+	write(FD_STDOUT, "rrb\n", 4);
 }
 
 void	reverse_both(t_node **a, t_node **b)
@@ -50,5 +50,5 @@ void	reverse_both(t_node **a, t_node **b)
 	reverse(b);
 	if (*a && (*a)->bench)
 		(*a)->bench->rrr++;
-	write(1, "rrr\n", 4);
+	write(FD_STDOUT, "rrr\n", 4);
 }

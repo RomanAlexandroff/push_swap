@@ -33,7 +33,7 @@ void	rotate_a(t_node **a)
 	rotate(a);
 	if (*a && (*a)->bench)
 		(*a)->bench->ra++;
-	write(1, "ra\n", 3);
+	write(FD_STDOUT, "ra\n", 3);
 }
 
 void	rotate_b(t_node **b)
@@ -41,7 +41,7 @@ void	rotate_b(t_node **b)
 	rotate(b);
 	if (*b && (*b)->bench)
 		(*b)->bench->rb++;
-	write(1, "rb\n", 3);
+	write(FD_STDOUT, "rb\n", 3);
 }
 
 void	rotate_both(t_node **a, t_node **b)
@@ -50,5 +50,5 @@ void	rotate_both(t_node **a, t_node **b)
 	rotate(b);
 	if (*a && (*a)->bench)
 		(*a)->bench->rr++;
-	write(1, "rr\n", 3);
+	write(FD_STDOUT, "rr\n", 3);
 }

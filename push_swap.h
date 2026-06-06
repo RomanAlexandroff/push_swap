@@ -20,26 +20,40 @@
 # include <stddef.h>
 # include <stdio.h>
 
-typedef struct s_bench
-{
-	bool            enabled;
-	const char      *strategy_name;
-	const char      *complexity;
-	unsigned int    sa;
-	unsigned int    sb;
-	unsigned int    ss;
-	unsigned int    pa;
-	unsigned int    pb;
-	unsigned int    ra;
-	unsigned int    rb;
-	unsigned int    rr;
-	unsigned int    rra;
-	unsigned int    rrb;
-	unsigned int    rrr;
-	float           disorder_percent;
-}               t_bench;
+# define SKIP_STRATEGY		NULL
+# define SKIP_COMPLEXITY	NULL
+# define SKIP_DISORDER		404.0f
+# define FD_STDOUT			1
+# define FD_STDERR			2
 
-typedef struct s_node
+typedef enum	e_mode
+{
+	SIMPLE_MODE,
+	MEDIUM_MODE,
+	COMPLEX_MODE,
+	ADAPTIVE_MODE,
+}				t_mode;
+
+typedef struct	s_bench
+{
+	bool			enabled;
+	float			disorder;
+	char			*strategy_name;
+	char			*complexity;
+	unsigned int	sa;
+	unsigned int	sb;
+	unsigned int	ss;
+	unsigned int	pa;
+	unsigned int	pb;
+	unsigned int	ra;
+	unsigned int	rb;
+	unsigned int	rr;
+	unsigned int	rra;
+	unsigned int	rrb;
+	unsigned int	rrr;
+}				t_bench;
+
+typedef struct	s_node
 {
 	int				value;
 	int				node_position;
@@ -51,18 +65,12 @@ typedef struct s_node
 	int				solving_cost;
 	bool			top_half_flag;
 	bool			next_to_solve;
-}                t_node;
-
-typedef enum e_mode
-{
-	SIMPLE_MODE,
-	MEDIUM_MODE,
-	COMPLEX_MODE,
-	ADAPTIVE_MODE,
-}			t_mode;
+}				t_node;
 
 t_bench	*bench_init(bool bench_flag);
+void	set_benchmark(t_node **a, char *strategy, char *complex, float disorder);
 void	benchmark_mode(t_bench *bench);
+void	render_benchmark(t_bench *bench, int total_ops);
 void	create_stack_safely(t_node **a, char **argv, t_bench *bench);
 int		characters_check(char *input);
 int		duplicates_check(t_node *a, int input);
@@ -73,7 +81,6 @@ t_node	*get_last_node(t_node *node);
 t_node	*get_lowest_value(t_node *stack);
 t_node	*find_next_to_solve(t_node *stack);
 int		get_stack_length(t_node *stack);
-void	print_disorder_percent(float disorder);
 float	compute_disorder(t_node *a, int nodes_count);
 bool	is_sorted(t_node *stack);
 void	position_update(t_node *stack);
@@ -84,7 +91,7 @@ void	next_to_solve_update(t_node *b);
 void	update_nodes(t_node *a, t_node *b);
 void	ensure_top(t_node **stack, t_node *node, char name);
 void	simple_strategy(t_node **a, t_node **b);
-void	adaptive_strategy(t_node **a, t_node **b, int nodes_count);
+void	adaptive_strategy(t_node **a, t_node **b, float disorder);
 void	medium_sort(t_node **a, t_node **b);
 void	sort_three(t_node **a);
 void	sort_many(t_node **a, t_node **b);

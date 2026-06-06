@@ -12,26 +12,25 @@
 
 #include "push_swap.h"
 
-void	adaptive_strategy(t_node **a, t_node **b, int nodes_count)
+void	adaptive_strategy(t_node **a, t_node **b, float disorder)
 {
-	float	disorder;
-
-	disorder = compute_disorder(*a, nodes_count);
 	if (disorder < 0.2f)
 		simple_strategy(a, b);
 	else if (disorder >= 0.2f && disorder < 0.5f)
 		medium_sort(a, b);
 	else if (disorder >= 0.5f)
 		complex_strategy(a, b);
-	return ;
+	set_benchmark(a, "Adaptive", SKIP_COMPLEXITY, SKIP_DISORDER);		// has to be down here to overwrite previuos values
 }
 
 static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 {
+	float	disorder;
+
+	disorder = compute_disorder(*a, get_stack_length(*a));
+	set_benchmark(a, SKIP_STRATEGY, SKIP_COMPLEXITY, disorder);
 	if (is_sorted(*a))
 		return ;
-	if (get_stack_length(*a) == 2)
-		return (swap_a(a));
 	if (mode == SIMPLE_MODE)
 		simple_strategy(a, b);
 	else if (mode == MEDIUM_MODE)
@@ -39,7 +38,7 @@ static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 	else if (mode == COMPLEX_MODE)
 		complex_strategy(a, b);
 	else
-		adaptive_strategy(a, b, get_stack_length(*a));
+		adaptive_strategy(a, b, disorder);
 }
 
 int	main(int argc, char **argv)
@@ -64,7 +63,6 @@ int	main(int argc, char **argv)
 		free_and_exit(&a, argv);
 	create_stack_safely(&a, argv, bench);						// parse argv arguments into a doubly linked list
 	mode_dispatcher(complexity_mode, &a, &b);			// the main sorting work happens in here
-	if (bench_flag)
-		benchmark_mode(bench);
+	benchmark_mode(bench);
 	return (free_stack_mem(&a), EXIT_SUCCESS);
 }
