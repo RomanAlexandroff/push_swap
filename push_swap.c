@@ -39,11 +39,7 @@ static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 	else if (mode == COMPLEX_MODE)
 		complex_strategy(a, b);
 	else
-<<<<<<< HEAD
-		sort_many(a, b);//write(1, "\n  - - Adaptive Sort has been trigerred\n\n", 42);		//adaptive_sort(a, b);				//TODO
-=======
 		adaptive_strategy(a, b, get_stack_length(*a));
->>>>>>> refactor
 }
 
 int	main(int argc, char **argv)
