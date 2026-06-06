@@ -114,6 +114,10 @@ void	reverse_both(t_node **a, t_node **b);
 	- make sure the subject does not have any changes, that
 		I have not implemented
 	- add heads to all the files
+	- inspect the whole codebase on the following things:
+			-- functions that dereference pointers must have NULL safety checks;
+			-- defined constants instead of magic numbers;
+			-- file names, function names, variable names must be consistent;
 	- run Norminette (make norm) with all the flags and fix
 		whatever it says
 	- THIS PROJECT REQUIRES MAKEFILE TO BE SUBMITED !
