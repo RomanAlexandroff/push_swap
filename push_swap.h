@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-13 13:33:08 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/05/28 17:24:45 by ccrucian         ###   ########.fr       */
+/*   Created: 2026/03/13 13:33:08 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/06/05 12:13:19 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	next_to_solve_update(t_node *b);
 void	update_nodes(t_node *a, t_node *b);
 void	ensure_top(t_node **stack, t_node *node, char name);
 void	simple_strategy(t_node **a, t_node **b);
+void	adaptive_strategy(t_node **a, t_node **b, int nodes_count);
 void	medium_sort(t_node **a, t_node **b);
 void	sort_three(t_node **a);
 void	sort_many(t_node **a, t_node **b);
