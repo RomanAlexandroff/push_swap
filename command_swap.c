@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_swap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42roma.it>      #+#  +:+       +#+        */
+/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-13 13:32:34 by roaleksa          #+#    #+#             */
-/*   Updated: 2026-03-13 13:32:34 by roaleksa         ###   ########.fr       */
+/*   Created: 2026/03/13 13:32:34 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/06/05 14:56:02 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,24 @@ static void	swap(t_node **top_node)
 void	swap_a(t_node **a)
 {
 	swap(a);
-	write(1, "sa\n", 3);
+	if (*a && (*a)->bench)
+		(*a)->bench->sa++;
+	write(FD_STDOUT, "sa\n", 3);
 }
 
 void	swap_b(t_node **b)
 {
 	swap(b);
-	write(1, "sb\n", 3);
+	if (*b && (*b)->bench)
+		(*b)->bench->sb++;
+	write(FD_STDOUT, "sb\n", 3);
 }
 
 void	swap_both(t_node **a, t_node **b)
 {
 	swap(a);
 	swap(b);
-	write(1, "ss\n", 3);
+	if (*a && (*a)->bench)
+		(*a)->bench->ss++;
+	write(FD_STDOUT, "ss\n", 3);
 }

@@ -79,6 +79,6 @@ void	free_and_exit(t_node **a, char **argv)
 {
 	free_stack_mem(a);
 	free_argv_mem(argv);
-	write(2, "Error\n", 6);
+	write(FD_STDERR, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }

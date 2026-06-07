@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_many_nodes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42roma.it>      #+#  +:+       +#+        */
+/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-13 13:33:14 by roaleksa          #+#    #+#             */
-/*   Updated: 2026-03-13 13:33:14 by roaleksa         ###   ########.fr       */
+/*   Created: 2026/03/13 13:33:14 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/06/05 16:13:41 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,16 @@ static void	solve_node(t_node **a, t_node **b)
 	push_to_a(a, b);
 }
 
+static void	sort_five(t_node **a, t_node **b)
+{
+	while (get_stack_length(*a) > 3)
+	{
+		update_nodes(*a, *b);
+		ensure_top(a, get_lowest_value(*a), 'a');
+		push_to_b(a, b);
+	}
+}
+
 void	sort_many(t_node **a, t_node **b)
 {
 	int		length;
@@ -64,8 +74,13 @@ void	sort_many(t_node **a, t_node **b)
 
 	length = 0;
 	length = get_stack_length(*a);
-	while (length-- > 3)
-		push_to_b(a, b);
+	if (length == 5)
+		sort_five(a, b);
+	else
+	{
+		while (length-- > 3)
+			push_to_b(a, b);
+	}
 	sort_three(a);
 	while (*b)
 	{

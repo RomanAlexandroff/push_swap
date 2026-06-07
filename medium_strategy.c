@@ -218,6 +218,7 @@ void	medium_sort(t_node **a, t_node **b)
 	int	start;
 	int	end;
 
+	set_benchmark(a, "Medium", "O(n√n)", SKIP_DISORDER);
 	assign_sorting_rank(*a);								// DONE here in the file
 	size = get_stack_length(*a);							// ORIGINAL from stack_calculations.c
 	chunk_count = ft_sqrt(size);					// DONE here in the file

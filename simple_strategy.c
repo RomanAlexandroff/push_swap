@@ -23,6 +23,7 @@ void	simple_strategy(t_node **a, t_node **b)
 {
 	t_node	*smallest_node;
 
+	set_benchmark(a, "Simple", "O(n2)", SKIP_DISORDER);
 	while (*a)
 	{
 		smallest_node = get_lowest_value(*a);
