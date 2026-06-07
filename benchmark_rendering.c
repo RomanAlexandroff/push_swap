@@ -16,10 +16,10 @@ static void	print_number(unsigned int num)
 {
 	char	c;
 
-    if (num >= 10)
-        print_number(num / 10);
-    c = (num % 10) + '0';
-    write(FD_STDERR, &c, 1);
+	if (num >= 10)
+		print_number(num / 10);
+	c = (num % 10) + '0';
+	write(FD_STDERR, &c, 1);
 }
 
 /* 
@@ -44,38 +44,43 @@ static void	print_disorder_percent(float disorder)
 	write(FD_STDERR, "%", 1);
 }
 
-static void print_string(char *str)
+static void	print_string(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str[i])
-    {
-        write(FD_STDERR, &str[i], 1);
-        i++;
-    }
+	i = 0;
+	while (str[i])
+	{
+		write(FD_STDERR, &str[i], 1);
+		i++;
+	}
 }
 
-static void print_ops_stats(char *label, unsigned int ops_num)
+static void	print_ops_stats(char *label, unsigned int ops_num)
 {
-    print_string(label);
-    print_number(ops_num);
+	print_string(label);
+	print_number(ops_num);
 }
 
-// [bench] disorder:    40.00%
-// [bench] strategy:    Adaptive / O(n√n)
-// [bench] total_ops:    13
-// [bench] sa:   0   sb:   0   ss:   0   pa:   5   pb:   5
-// [bench] ra:   2   rb:   1   rr:   0   rra:   0   rrb:   0   rrr:   0
-
+/*
+	Renderer which takes all the benchmark
+	debug stats and prints them with write()
+	into stderr in a comprehensive table
+	format as follows:
+		[bench] disorder:    40.00%
+		[bench] strategy:    Adaptive / O(n√n)
+		[bench] total_ops:    13
+		[bench] sa:   0   sb:   0   ss:   0   pa:   5   pb:   5
+		[bench] ra:   2   rb:   1   rr:   0   rra:   0   rrb:   0   rrr:   0
+*/
 void	render_benchmark(t_bench *bench, int total_ops)
 {
 	write(FD_STDERR, "[bench] disorder:    ", 21);
 	print_disorder_percent(bench->disorder);
 	write(FD_STDERR, "\n[bench] strategy:    ", 22);
-    print_string(bench->strategy_name);
-    write(FD_STDERR, " / ", 3);
-    print_string(bench->complexity);
+	print_string(bench->strategy_name);
+	write(FD_STDERR, " / ", 3);
+	print_string(bench->complexity);
 	write(FD_STDERR, "\n[bench] total_ops:    ", 23);
 	print_number(total_ops);
 	print_ops_stats("\n[bench] sa:   ", bench->sa);
