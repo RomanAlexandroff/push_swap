@@ -26,7 +26,7 @@ void	adaptive_strategy(t_node **a, t_node **b, float disorder)
 	if (disorder < 0.2f)
 		simple_strategy(a, b);
 	else if (disorder >= 0.2f && disorder < 0.5f)
-		medium_strategyt(a, b);
+		medium_strategy(a, b);
 	else if (disorder >= 0.5f)
 		complex_strategy(a, b);
 	set_benchmark(a, "Adaptive", SKIP_COMPLEXITY, SKIP_DISORDER);

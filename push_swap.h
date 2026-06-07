@@ -60,11 +60,8 @@ typedef struct s_node
 	int				index;
 	struct s_node	*node_before;
 	struct s_node	*node_after;
-	struct s_node	*destination;
-	t_bench			*bench;
-	int				solving_cost;
 	bool			top_half_flag;
-	bool			next_to_solve;
+	t_bench			*bench;
 }				t_node;
 
 /* Initialization and User Arguments Parsing */
@@ -87,14 +84,12 @@ void	sort_many(t_node **a, t_node **b);
 float	compute_disorder(t_node *a, int nodes_count);
 int		get_stack_length(t_node *stack);
 bool	is_sorted(t_node *stack);
-void	position_update(t_node *stack);
-void	solving_cost_update(t_node *a, t_node *b);
-void	next_to_solve_update(t_node *b);
-void	update_nodes(t_node *a, t_node *b);
-void	ensure_top(t_node **stack, t_node *node, char name);
+void	move_to_top_a(t_node **a, int pos);
+void	move_to_top_b(t_node **b, int pos);
+void	push_chunk(t_node **a, t_node **b, int min, int max);
 t_node	*get_last_node(t_node *node);
 t_node	*get_lowest_value(t_node *stack);
-t_node	*find_next_to_solve(t_node *stack);
+int		ft_sqrt(int num);
 
 /* Stack Sorting Orepations */
 void	push_to_a(t_node **a, t_node **b);

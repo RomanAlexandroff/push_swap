@@ -4,9 +4,8 @@ NAME = push_swap
 SRCS = push_swap.c benchmark_mode.c command_push.c command_reverse.c\
 		command_rotate.c command_swap.c compute_disorder.c create_stack.c\
 		exceptions_handling.c flags_handling.c medium_strategy.c\
-		simple_strategy.c sort_many_nodes.c sort_three_nodes.c\
-		split_arguments.c stack_calculations.c update_nodes.c\
-		complex_strategy.c benchmark_rendering.c
+		simple_strategy.c complex_strategy.c benchmark_rendering.c\
+		split_arguments.c stack_calculations.c medium_strategy_utils.c
 OBJS = $(SRCS:.c=.o)
 
 ARG ?= "4 67 3 87 23 -234"
@@ -55,7 +54,7 @@ valgrind:
 ifeq ($(UNAME),Darwin)
 	@echo "Using Leaks for memory checking."
 	@$(CC) $(CFLAGS) $(SRCS) -g -o $(NAME)
-	@leaks --atExit -- ./$(NAME) $(ARG) --bench --complex
+	@leaks --atExit -- ./$(NAME) $(ARG) --bench --medium
 	@$(RM) $(NAME)
 	@$(RM) -r $(NAME).dSYM
 else

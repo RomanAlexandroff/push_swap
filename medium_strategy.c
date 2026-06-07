@@ -12,11 +12,34 @@
 
 #include "push_swap.h"
 
-/* 
-	Moves the node at position pos in stack B to the top.
-	Uses rotate or reverse depending on which path is shorter.
+/*
+	Used in the Medium sorting strategy.
+	Rotates or reverse-rotates stack A
+	to bring a node to top. pos is positive
+	for rotations and negative for reverse.
 */
-static void	move_to_top_b(t_node **b, int pos)
+void	move_to_top_a(t_node **a, int pos)
+{
+	if (pos >= 0)
+	{
+		while (pos--)
+			rotate_a(a);
+	}
+	else
+	{
+		pos = -pos;
+		while (pos--)
+			reverse_a(a);
+	}
+}
+
+/*
+	Used in the Medium sorting strategy.
+	Moves the node at position pos in stack
+	B to the top. Uses rotate or reverse
+	depending on which path is shorter.
+*/
+void	move_to_top_b(t_node **b, int pos)
 {
 	int	size;
 
@@ -41,163 +64,36 @@ static void	move_to_top_b(t_node **b, int pos)
 }
 
 /*
-	Scans stack B to find the node with the largest index.
-	Returns that node’s position from the top.
-*/
-static int	find_max_position(t_node *stack)
-{
-	int	max_index;
-	int	max_position;
-	int	position;
-
-	max_index = stack->index;
-	max_position = 0;
-	position = 0;
-	while (stack)
-	{
-		if (stack->index > max_index)
-		{
-			max_index = stack->index;
-			max_position = position;
-		}
-		position++;
-		stack = stack->node_after;
-	}
-	return (max_position);
-}
-
-/*
-	Repeatedly moves the largest node from B back to A.
-	Ensures B is emptied in descending index order.
+	Used in the Medium sorting strategy.
+	Repeatedly moves the largest node
+	from B back to A. Ensures B is emptied
+	in descending index order.
 */
 static void	push_back_sorted(t_node **a, t_node **b)
 {
-	int	pos;
+	int		max_index;
+	int		max_position;
+	int		position;
+	t_node	*current;
 
 	while (*b)
 	{
-		pos = find_max_position(*b);
-		move_to_top_b(b, pos);
+		max_index = (*b)->index;
+		max_position = 0;
+		position = 0;
+		current = *b;
+		while (current)
+		{
+			if (current->index > max_index)
+			{
+				max_index = current->index;
+				max_position = position;
+			}
+			position++;
+			current = current->node_after;
+		}
+		move_to_top_b(b, max_position);
 		push_to_a(a, b);
-	}
-}
-
-/*
-	Rotates or reverse-rotates stack A to bring a node to top.
-	pos is positive for rotations and negative for reverse.
-*/
-static void	move_to_top_a(t_node **a, int pos)
-{
-	if (pos >= 0)
-	{
-		while (pos--)
-			rotate_a(a);
-	}
-	else
-	{
-		pos = -pos;
-		while (pos--)
-			reverse_a(a);
-	}
-}
-
-/*
-	Searches from the bottom of the stack upward.
-	Returns distance to the first node in [min,max],
-	or -1 if no matching node exists.
-*/
-static int	distance_from_bottom(t_node *stack, int min, int max)
-{
-	int		distance;
-	t_node	*bottom;
-
-	if (!stack)
-		return (-1);
-	bottom = stack;
-	while (bottom->node_after)
-		bottom = bottom->node_after;
-	distance = 0;
-	while (bottom)
-	{
-		if (bottom->index >= min && bottom->index <= max)
-			return (distance);
-		distance++;
-		bottom = bottom->node_before;
-	}
-	return (-1);
-}
-
-/*
-	Searches from the top of the stack downward.
-	Returns distance to the first node in [min,max],
-	or -1 if none found.
-*/
-static int	distance_from_top(t_node *stack, int min, int max)
-{
-	int	distance;
-
-	distance = 0;
-	while (stack)
-	{
-		if (stack->index >= min && stack->index <= max)
-			return (distance);
-		distance++;
-		stack = stack->node_after;
-	}
-	return (-1);
-}
-
-/*
-	Chooses the closest chunk node in A from top or bottom.
-	Returns positive top distance or negative bottom distance.
-*/
-static int	find_nearest_chunk_value(t_node *a, int min, int max)
-{
-	int	top_dist;
-	int	bottom_dist;
-
-	top_dist = distance_from_top(a, min, max);
-	bottom_dist = distance_from_bottom(a, min, max);
-
-	if (top_dist <= bottom_dist)
-		return (top_dist);
-	return (-(bottom_dist + 1));
-}
-
-/*
-	Checks whether stack contains any node
-	index in chunk range. Used to know when
-	the current chunk has been fully moved.
-*/
-static bool	contains_chunk_value(t_node *stack, int min, int max)
-{
-	while (stack)
-	{
-		if (stack->index >= min && stack->index <= max)
-			return (true);
-		stack = stack->node_after;
-	}
-	return (false);
-}
-
-/*
-	Moves all nodes in the current chunk
-	from A to B. Rotates B for smaller values
-	to keep larger chunk values near top.
-*/
-static void	push_chunk(t_node **a, t_node **b, int min, int max)
-{
-	int	pos;
-	int	middle;
-
-	middle = (min + max) / 2;
-	while (contains_chunk_value(*a, min, max))
-	{
-		pos = find_nearest_chunk_value(*a, min, max);
-		move_to_top_a(a, pos);
-		push_to_b(a, b);
-		if ((*b)->index < middle)
-			rotate_b(b);
 	}
 }
 
@@ -226,36 +122,6 @@ static void	assign_sorting_rank(t_node *stack)
 		current->index = count;
 		current = current->node_after;
 	}
-}
-
-/*
-	Computes integer square root of nb.
-	Used to determine the number of chunks.
-*/
-static int	ft_sqrt(int nb)
-{
-	int	low;
-	int	high;
-	int	mid;
-	int	ans;
-
-	if (nb <= 0)
-		return (0);
-	low = 1;
-	high = nb;
-	ans = 1;
-	while (low <= high)
-	{
-		mid = (low + high) / 2;
-		if ((long)mid * mid <= nb)
-		{
-			ans = mid;
-			low = mid + 1;
-		}
-		else
-			high = mid - 1;
-	}
-	return (ans);
 }
 
 /*

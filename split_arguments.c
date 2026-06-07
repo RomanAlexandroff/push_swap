@@ -111,7 +111,7 @@ char	**split_arguments(char **argv, int argc)
 	args_count = find_arguments(argv, argc);
 	if (!args_count)
 		exit(EXIT_FAILURE);
-	output = malloc(sizeof(char *) * (args_count + 1));		// allocate memory for the array of pointers to strings
+	output = malloc(sizeof(char *) * (args_count + 1));
 	if (!output)
 		return (NULL);
 	i = 0;

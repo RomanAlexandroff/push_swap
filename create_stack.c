@@ -12,6 +12,12 @@
 
 #include "push_swap.h"
 
+/*
+	Dynamically allocates memory for a new
+	node in the list, sets default values,
+	inserts the new node into the doubly
+	linked list. Returns 1 on success, else 0.
+*/
 static int	add_new_node(t_node **stack, int value, t_bench *bench)
 {
 	t_node	*new_node;
@@ -24,7 +30,7 @@ static int	add_new_node(t_node **stack, int value, t_bench *bench)
 		return (0);
 	new_node->node_after = NULL;
 	new_node->value = value;
-	new_node->bench = bench;			// assign pointer to the instance of the bench struct
+	new_node->bench = bench;
 	if (*stack == NULL)
 	{
 		*stack = new_node;
