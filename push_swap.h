@@ -67,7 +67,7 @@ typedef struct s_node
 	bool			next_to_solve;
 }				t_node;
 
-/* Initialization and User Arguments Parsing*/
+/* Initialization and User Arguments Parsing */
 char	**split_arguments(char **argv, int argc);
 void	create_stack_safely(t_node **a, char **argv, t_bench *bench);
 int		characters_check(char *input);
@@ -78,7 +78,7 @@ t_bench	*bench_init(bool bench_flag);
 /* Sorting Strategies */
 void	adaptive_strategy(t_node **a, t_node **b, float disorder);
 void	simple_strategy(t_node **a, t_node **b);
-void	medium_sort(t_node **a, t_node **b);
+void	medium_strategy(t_node **a, t_node **b);
 void	complex_strategy(t_node **a, t_node **b);
 void	sort_three(t_node **a);
 void	sort_many(t_node **a, t_node **b);
@@ -96,7 +96,7 @@ t_node	*get_last_node(t_node *node);
 t_node	*get_lowest_value(t_node *stack);
 t_node	*find_next_to_solve(t_node *stack);
 
-/* Sorting Orepations */
+/* Stack Sorting Orepations */
 void	push_to_a(t_node **a, t_node **b);
 void	push_to_b(t_node **a, t_node **b);
 void	swap_a(t_node **a);
