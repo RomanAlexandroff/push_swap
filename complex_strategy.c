@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 16:00:07 by ccrucian          #+#    #+#             */
-/*   Updated: 2026/06/05 13:16:43 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/08 13:43:21 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	get_max_bits(t_node *a)
 }
 
 /*
- * Sorts the stack using a binary radix sort algorithm.
+ * Sorts the stack using a binary Radix sort algorithm.
  * Each node is indexed according to its relative order,
  * then elements are sorted bit by bit using two stacks.
  */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_arguments.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 13:34:58 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/05 15:23:21 by roaleksa         ###   ########.fr       */
+/*   Updated: 2026/06/08 16:54:37 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,8 @@ static int	find_arguments(char **argv, int argc)
 	int		j;
 
 	args_count = 0;
-	i = 0;
-	j = 0;
-	while (j < argc)
+	j = -1;
+	while (++j < argc)
 	{
 		i = 0;
 		while (argv[j][i])
@@ -78,7 +77,6 @@ static int	find_arguments(char **argv, int argc)
 				i++;
 			}
 		}
-		j++;
 	}
 	return (args_count);
 }

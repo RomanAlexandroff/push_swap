@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   medium_strategy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42roma.it>      #+#  +:+       +#+        */
+/*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-06-01 10:26:04 by roaleksa          #+#    #+#             */
-/*   Updated: 2026-06-01 10:26:04 by roaleksa         ###   ########.fr       */
+/*   Created: 2026/06/01 10:26:04 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/06/08 14:56:57 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,11 @@ static void	assign_sorting_rank(t_node *stack)
 /*
 	Medium sort using sqrt(n) chunks.
 	Ranks A, divides into chunks, pushes
-	chunks to B, then rebuilds A
+	chunks to B, then rebuilds A.
+	Chunk-based Sort algorithm for 2 stacks
 */
-void	medium_strategy(t_node **a, t_node **b)
+void	medium_strategy(t_node **a, t_node **b, int size)
 {
-	int	size;
 	int	chunk_count;
 	int	chunk_size;
 	int	chunk;
@@ -140,7 +140,6 @@ void	medium_strategy(t_node **a, t_node **b)
 
 	set_benchmark(a, "Medium", "O(n√n)", SKIP_DISORDER);
 	assign_sorting_rank(*a);
-	size = get_stack_length(*a);
 	chunk_count = ft_sqrt(size);
 	if (chunk_count == 0)
 		chunk_count = 1;

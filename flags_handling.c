@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flags_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42roma.it>      #+#  +:+       +#+        */
+/*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-05-30 08:11:42 by roaleksa          #+#    #+#             */
-/*   Updated: 2026-05-30 08:11:42 by roaleksa         ###   ########.fr       */
+/*   Created: 2026/05/30 08:11:42 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/06/08 13:24:39 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,15 @@ bool	set_flags(char **argv, t_mode *complexity_mode, bool *bench_flag)
 			continue ;
 		if (!validate_flag(argv[i]))
 			return (false);
-		if (argv[i][2] == 's')
+		if (argv[i][2] == 's' && argv[i][3] == 'i')
 			*complexity_mode = SIMPLE_MODE;
-		else if (argv[i][2] == 'm')
+		else if (argv[i][2] == 'm' && argv[i][3] == 'e')
 			*complexity_mode = MEDIUM_MODE;
-		else if (argv[i][2] == 'c')
+		else if (argv[i][2] == 'c' && argv[i][3] == 'o')
 			*complexity_mode = COMPLEX_MODE;
-		else if (argv[i][2] == 'a')
+		else if (argv[i][2] == 'a' && argv[i][3] == 'd')
 			*complexity_mode = ADAPTIVE_MODE;
-		else if (argv[i][2] == 'b')
+		else if (argv[i][2] == 'b' && argv[i][3] == 'e')
 			*bench_flag = true;
 	}
 	return (true);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   medium_strategy_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42roma.it>      #+#  +:+       +#+        */
+/*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-06-07 21:42:32 by roaleksa          #+#    #+#             */
-/*   Updated: 2026-06-07 21:42:32 by roaleksa         ###   ########.fr       */
+/*   Created: 2026/06/07 21:42:32 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/06/08 13:24:39 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 	Returns distance to the first node in [min,max],
 	or -1 if no matching node exists.
 */
+
 static int	distance_from_bottom(t_node *stack, int min, int max)
 {
 	int		distance;

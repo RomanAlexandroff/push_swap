@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_strategy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccrucian <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 17:17:44 by ccrucian          #+#    #+#             */
-/*   Updated: 2026/05/28 17:21:35 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/08 13:27:59 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static void	position_update(t_node *stack)
 	Sorts the stack by repeatedly moving the smallest node
 	from stack A to stack B using the shortest rotation path.
 	Once all nodes are moved, elements are pushed back to A
-	in sorted order.
+	in sorted order. 
+	It is a Selection Sort alghorithm adapted for two stacks.
 */
 void	simple_strategy(t_node **a, t_node **b)
 {

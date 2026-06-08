@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:08 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/05 12:13:19 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/08 14:55:23 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ bool	set_flags(char **argv, t_mode *complexity_mode, bool *bench_flag);
 t_bench	*bench_init(bool bench_flag);
 
 /* Sorting Strategies */
-void	adaptive_strategy(t_node **a, t_node **b, float disorder);
+void	adaptive_strategy(t_node **a, t_node **b, int size, float disorder);
 void	simple_strategy(t_node **a, t_node **b);
-void	medium_strategy(t_node **a, t_node **b);
+void	medium_strategy(t_node **a, t_node **b, int size);
 void	complex_strategy(t_node **a, t_node **b);
 void	sort_three(t_node **a);
 void	sort_many(t_node **a, t_node **b);
