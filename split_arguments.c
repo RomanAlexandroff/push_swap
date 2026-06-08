@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 13:34:58 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/08 16:54:37 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/08 17:24:29 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,32 @@ static char	*next_word(char *str)
 	return (next_word);
 }
 
+static int	count_arguments(char *argv)
+{
+	int				i;
+	int				count;
+	bool			arg_detected;
+
+	i = 0;
+	count = 0;
+	while (argv[i])
+	{
+		arg_detected = false;
+		while (argv[i] == ' ' && argv[i])
+			i++;
+		while (argv[i] != ' ' && argv[i])
+		{
+			if (!arg_detected)
+			{
+				arg_detected = true;
+				count ++;
+			}
+			i++;
+		}
+	}
+	return (count);
+}
+
 /*
  *	Counts the number of arguments in an array of strings
  *	no matter if arguments are located in their individual
@@ -53,30 +79,14 @@ static char	*next_word(char *str)
 static int	find_arguments(char **argv, int argc)
 {
 	int		args_count;
-	bool	arg_detected;
-	int		i;
 	int		j;
 
 	args_count = 0;
-	j = -1;
-	while (++j < argc)
+	j = 0;
+	while (j < argc)
 	{
-		i = 0;
-		while (argv[j][i])
-		{
-			arg_detected = false;
-			while (argv[j][i] == ' ' && argv[j][i])
-				i++;
-			while (argv[j][i] != ' ' && argv[j][i])
-			{
-				if (!arg_detected)
-				{
-					args_count++;
-					arg_detected = true;
-				}
-				i++;
-			}
-		}
+		args_count += count_arguments(argv[j]);
+		j++;
 	}
 	return (args_count);
 }
@@ -121,9 +131,9 @@ char	**split_arguments(char **argv, int argc)
 			return (cleanup_output(output, i));
 		if (output[i][0] == '\0')
 		{
-			j++;								// move to the next string inside argv
-			free(output[i]);					// free the empty string memory
-			continue ;							// skip incrementing [i] because we did not get any new argument this iteration 
+			j++;
+			free(output[i]);
+			continue ;
 		}
 		i++;
 	}
