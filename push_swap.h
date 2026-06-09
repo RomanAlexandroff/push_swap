@@ -79,8 +79,6 @@ void	adaptive_strategy(t_node **a, t_node **b, int size, float disorder);
 void	simple_strategy(t_node **a, t_node **b);
 void	medium_strategy(t_node **a, t_node **b, int size);
 void	complex_strategy(t_node **a, t_node **b);
-void	sort_three(t_node **a);
-void	sort_many(t_node **a, t_node **b);
 
 /* Sorting Helper Functions */
 float	compute_disorder(t_node *a, int nodes_count);
