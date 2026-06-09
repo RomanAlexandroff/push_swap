@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:08 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/05 12:13:19 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/08 14:55:23 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,14 @@ typedef struct s_node
 	int				index;
 	struct s_node	*node_before;
 	struct s_node	*node_after;
-	struct s_node	*destination;
-	t_bench			*bench;
-	int				solving_cost;
 	bool			top_half_flag;
-	bool			next_to_solve;
+	t_bench			*bench;
 }				t_node;
 
-/* Initialization and User Arguments Parsing*/
+/* Initialization and User Arguments Parsing */
 char	**split_arguments(char **argv, int argc);
+int		count_arguments(char *argv);
+int		find_arguments(char **argv, int argc);
 void	create_stack_safely(t_node **a, char **argv, t_bench *bench);
 int		characters_check(char *input);
 int		duplicates_check(t_node *a, int input);
@@ -76,27 +75,23 @@ bool	set_flags(char **argv, t_mode *complexity_mode, bool *bench_flag);
 t_bench	*bench_init(bool bench_flag);
 
 /* Sorting Strategies */
-void	adaptive_strategy(t_node **a, t_node **b, float disorder);
+void	adaptive_strategy(t_node **a, t_node **b, int size, float disorder);
 void	simple_strategy(t_node **a, t_node **b);
-void	medium_sort(t_node **a, t_node **b);
+void	medium_strategy(t_node **a, t_node **b, int size);
 void	complex_strategy(t_node **a, t_node **b);
-void	sort_three(t_node **a);
-void	sort_many(t_node **a, t_node **b);
 
 /* Sorting Helper Functions */
 float	compute_disorder(t_node *a, int nodes_count);
 int		get_stack_length(t_node *stack);
 bool	is_sorted(t_node *stack);
-void	position_update(t_node *stack);
-void	solving_cost_update(t_node *a, t_node *b);
-void	next_to_solve_update(t_node *b);
-void	update_nodes(t_node *a, t_node *b);
-void	ensure_top(t_node **stack, t_node *node, char name);
+void	move_to_top_a(t_node **a, int pos);
+void	move_to_top_b(t_node **b, int pos);
+void	push_chunk(t_node **a, t_node **b, int min, int max);
 t_node	*get_last_node(t_node *node);
 t_node	*get_lowest_value(t_node *stack);
-t_node	*find_next_to_solve(t_node *stack);
+int		ft_sqrt(int num);
 
-/* Sorting Orepations */
+/* Stack Sorting Orepations */
 void	push_to_a(t_node **a, t_node **b);
 void	push_to_b(t_node **a, t_node **b);
 void	swap_a(t_node **a);
@@ -121,33 +116,3 @@ void	set_benchmark(t_node **a, char *strategy, char *complex,
 void	render_benchmark(t_bench *bench, int total_ops);
 
 #endif
-
-/*			TO-DO LIST
-
-	- FOR TESTS
-		https://push-swap42-visualizer.vercel.app
-
-	- edit README.md as per project subject
-	- check if it compiles on Ubuntu
-	- run Tests (make test)
-	- make sure the subject does not have any changes, that
-		we have not implemented
-	- inspect the whole codebase on the following things:
-			-- functions that dereference pointers must have NULL safety checks;
-			-- defined constants instead of magic numbers;
-			-- file names, function names, variable names must be consistent;
-			-- old functions that are not used any more (remove from .h file);
-			-- old struct variables that are not used (remove from .h file);
-			-- old files that are not used any more (remove from the Makefile).
-	- run Norminette (make norm) with all the flags and fix
-		whatever it says
-	- create a new git branch and try doing the livecoding part task:
-		they want us to add a new selection flag like --something. That flag
-		has to make the program print out only the number of operations to
-		order the stack but not the operations themselves. For example, you
-		prompt with ./push_swap --something 2 1 3 and the output shall be 7
-		(or whichever number of operations it takes).
-
-		ALSO, what was that thing about implementing our own sorting algorithm
-		to sort 5 numbers under 10 operations??? Or did I dream it?
-*/

@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:00 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/05 14:25:16 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/08 14:54:35 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 	overwrites the strategy name from the previous
 	strategy call.
 */
-void	adaptive_strategy(t_node **a, t_node **b, float disorder)
+void	adaptive_strategy(t_node **a, t_node **b, int size, float disorder)
 {
 	if (disorder < 0.2f)
 		simple_strategy(a, b);
 	else if (disorder >= 0.2f && disorder < 0.5f)
-		medium_sort(a, b);
+		medium_strategy(a, b, size);
 	else if (disorder >= 0.5f)
 		complex_strategy(a, b);
 	set_benchmark(a, "Adaptive", SKIP_COMPLEXITY, SKIP_DISORDER);
@@ -42,19 +42,21 @@ void	adaptive_strategy(t_node **a, t_node **b, float disorder)
 static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 {
 	float	disorder;
+	int		size;
 
-	disorder = compute_disorder(*a, get_stack_length(*a));
+	size = get_stack_length(*a);
+	disorder = compute_disorder(*a, size);
 	set_benchmark(a, SKIP_STRATEGY, SKIP_COMPLEXITY, disorder);
 	if (is_sorted(*a))
 		return ;
 	if (mode == SIMPLE_MODE)
 		simple_strategy(a, b);
 	else if (mode == MEDIUM_MODE)
-		medium_sort(a, b);
+		medium_strategy(a, b, size);
 	else if (mode == COMPLEX_MODE)
 		complex_strategy(a, b);
 	else
-		adaptive_strategy(a, b, disorder);
+		adaptive_strategy(a, b, size, disorder);
 }
 
 /*

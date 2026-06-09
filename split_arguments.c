@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_arguments.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 13:34:58 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/05 15:23:21 by roaleksa         ###   ########.fr       */
+/*   Updated: 2026/06/08 17:24:29 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,45 +44,6 @@ static char	*next_word(char *str)
 	return (next_word);
 }
 
-/*
- *	Counts the number of arguments in an array of strings
- *	no matter if arguments are located in their individual
- *	strings, or in one common string, or in a mix of
- *	individual and common strings.
-*/
-static int	find_arguments(char **argv, int argc)
-{
-	int		args_count;
-	bool	arg_detected;
-	int		i;
-	int		j;
-
-	args_count = 0;
-	i = 0;
-	j = 0;
-	while (j < argc)
-	{
-		i = 0;
-		while (argv[j][i])
-		{
-			arg_detected = false;
-			while (argv[j][i] == ' ' && argv[j][i])
-				i++;
-			while (argv[j][i] != ' ' && argv[j][i])
-			{
-				if (!arg_detected)
-				{
-					args_count++;
-					arg_detected = true;
-				}
-				i++;
-			}
-		}
-		j++;
-	}
-	return (args_count);
-}
-
 static char	**cleanup_output(char **output, int count)
 {
 	while (count > 0)
@@ -92,6 +53,30 @@ static char	**cleanup_output(char **output, int count)
 	}
 	free(output);
 	return (NULL);
+}
+
+static char	**fill_output(char **output, char **argv, int args_count)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (i < args_count)
+	{
+		output[i] = next_word(argv[j]);
+		if (!output[i])
+			return (cleanup_output(output, i));
+		if (output[i][0] == '\0')
+		{
+			j++;
+			free(output[i]);
+			continue ;
+		}
+		i++;
+	}
+	output[i] = NULL;
+	return (output);
 }
 
 /*
@@ -105,30 +90,13 @@ char	**split_arguments(char **argv, int argc)
 {
 	int		args_count;
 	char	**output;
-	int		i;
-	int		j;
 
 	args_count = find_arguments(argv, argc);
 	if (!args_count)
 		exit(EXIT_FAILURE);
-	output = malloc(sizeof(char *) * (args_count + 1));		// allocate memory for the array of pointers to strings
+	output = malloc(sizeof(char *) * (args_count + 1));
 	if (!output)
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (i < args_count)
-	{
-		output[i] = next_word(argv[j]);
-		if (!output[i])
-			return (cleanup_output(output, i));
-		if (output[i][0] == '\0')
-		{
-			j++;								// move to the next string inside argv
-			free(output[i]);					// free the empty string memory
-			continue ;							// skip incrementing [i] because we did not get any new argument this iteration 
-		}
-		i++;
-	}
-	output[i] = NULL;
+	output = fill_output(output, argv, args_count);
 	return (output);
 }
