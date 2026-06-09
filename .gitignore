@@ -7,3 +7,5 @@
 *.dSYM
 .gdb_history
 ~$sh-Swap Workflow.docx
+.vscode
+checker*
