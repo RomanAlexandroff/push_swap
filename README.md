@@ -151,6 +151,16 @@ Example:
 ./push_swap --bench --adaptive 4 2 1 3
 ```
 
+will display the following Benchmark mode output
+
+```bash
+[bench] disorder:    66.67%
+[bench] strategy:    Adaptive / O(n log n)
+[bench] total_ops:    12
+[bench] sa:   0   sb:   0   ss:   0   pa:   4   pb:   4
+[bench] ra:   4   rb:   0   rr:   0   rra:   0   rrb:   0   rrr:   0
+```
+
 ## Operations
 
 The project implements the complete set of allowed `push_swap` operations.
@@ -333,6 +343,7 @@ Classic references and useful material:
 - Selection sort: GeeksforGeeks, https://en.wikipedia.org/wiki/Selection_sort
 - Radix sort: GeeksforGeeks, https://en.wikipedia.org/wiki/Radix_sort
 - Big O notation: https://en.wikipedia.org/wiki/Big_O_notation
+- Testing sorting algorithms:  https://push-swap42-visualizer.vercel.app
 
 ## AI Usage Disclosure
 
@@ -346,6 +357,6 @@ Specifically, AI was used for:
 - testing some functions
 - writing this README according to the required structure
 - improving clarity and readability of the documentation
-- norminette 
+- helping installing some development tools like Norminette for code style compliance check
 
 AI was not used as the source of the project logic itself. The algorithm descriptions in this README are based on the actual implementation found in the repository.
