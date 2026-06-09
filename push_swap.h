@@ -66,6 +66,8 @@ typedef struct s_node
 
 /* Initialization and User Arguments Parsing */
 char	**split_arguments(char **argv, int argc);
+int		count_arguments(char *argv);
+int		find_arguments(char **argv, int argc);
 void	create_stack_safely(t_node **a, char **argv, t_bench *bench);
 int		characters_check(char *input);
 int		duplicates_check(t_node *a, int input);

@@ -44,53 +44,6 @@ static char	*next_word(char *str)
 	return (next_word);
 }
 
-static int	count_arguments(char *argv)
-{
-	int				i;
-	int				count;
-	bool			arg_detected;
-
-	i = 0;
-	count = 0;
-	while (argv[i])
-	{
-		arg_detected = false;
-		while (argv[i] == ' ' && argv[i])
-			i++;
-		while (argv[i] != ' ' && argv[i])
-		{
-			if (!arg_detected)
-			{
-				arg_detected = true;
-				count ++;
-			}
-			i++;
-		}
-	}
-	return (count);
-}
-
-/*
- *	Counts the number of arguments in an array of strings
- *	no matter if arguments are located in their individual
- *	strings, or in one common string, or in a mix of
- *	individual and common strings.
-*/
-static int	find_arguments(char **argv, int argc)
-{
-	int		args_count;
-	int		j;
-
-	args_count = 0;
-	j = 0;
-	while (j < argc)
-	{
-		args_count += count_arguments(argv[j]);
-		j++;
-	}
-	return (args_count);
-}
-
 static char	**cleanup_output(char **output, int count)
 {
 	while (count > 0)
@@ -102,26 +55,11 @@ static char	**cleanup_output(char **output, int count)
 	return (NULL);
 }
 
-/*
- *	Takes one single string with multiple values
- *	inside and splits all the values into their
- *	individual strings. Adds NULL at the end of
- *	the array for easier future parsing. Returns a
- *	NULL-terminated array of \0-terminated strings.
-*/
-char	**split_arguments(char **argv, int argc)
+static char	**fill_output(char **output, char **argv, int args_count)
 {
-	int		args_count;
-	char	**output;
 	int		i;
 	int		j;
 
-	args_count = find_arguments(argv, argc);
-	if (!args_count)
-		exit(EXIT_FAILURE);
-	output = malloc(sizeof(char *) * (args_count + 1));
-	if (!output)
-		return (NULL);
 	i = 0;
 	j = 0;
 	while (i < args_count)
@@ -138,5 +76,27 @@ char	**split_arguments(char **argv, int argc)
 		i++;
 	}
 	output[i] = NULL;
+	return (output);
+}
+
+/*
+ *	Takes one single string with multiple values
+ *	inside and splits all the values into their
+ *	individual strings. Adds NULL at the end of
+ *	the array for easier future parsing. Returns a
+ *	NULL-terminated array of \0-terminated strings.
+*/
+char	**split_arguments(char **argv, int argc)
+{
+	int		args_count;
+	char	**output;
+
+	args_count = find_arguments(argv, argc);
+	if (!args_count)
+		exit(EXIT_FAILURE);
+	output = malloc(sizeof(char *) * (args_count + 1));
+	if (!output)
+		return (NULL);
+	output = fill_output(output, argv, args_count);
 	return (output);
 }

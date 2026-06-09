@@ -5,7 +5,9 @@ SRCS = push_swap.c benchmark_mode.c command_push.c command_reverse.c\
 		command_rotate.c command_swap.c compute_disorder.c create_stack.c\
 		exceptions_handling.c flags_handling.c medium_strategy.c\
 		simple_strategy.c complex_strategy.c benchmark_rendering.c\
-		split_arguments.c stack_calculations.c medium_strategy_utils.c
+		split_arguments.c stack_calculations.c medium_strategy_utils.c\
+		split_arguments_utils.c
+		
 OBJS = $(SRCS:.c=.o)
 
 ARG ?= "4 67 3 87 23 -234"
