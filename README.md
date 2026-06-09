@@ -1,294 +1,362 @@
-*This project has been created as part of the 42 curriculum by roaleksa.*
+*This project has been created as part of the 42 curriculum by ccrucian and roaleksa.*
 
-# Push Swap
-
-<br>
-
-## Table of Contents
-
-- [Description](#description)
-- [Detailed Algorithm Description](#detailed-algorithm-description)
-- [Instructions](#instructions)
-- [Usage](#usage)
-- [Operations](#operations)
-- [Project Structure](#project-structure)
-- [Function Overview](#function-overview)
-- [Resources](#resources)
-- [AI Usage Disclosure](#ai-usage-disclosure)
-
-<br>
+# push_swap
 
 ## Description
 
-Push Swap is a 42 school project whose goal is to sort a list of integers using only two stacks and a limited set of stack operations. The program must produce a valid sequence of moves that sorts the input values in ascending order. Efficiency is essential: the solution should minimize the number of operations used to sort the data.
+`push_swap` is a 42 curriculum project focused on sorting a list of integers using only two stacks and a limited set of stack operations.
 
-This repository contains a C implementation of the Push Swap solver. The input is parsed into a linked-stack representation, validated for duplicates and integer range, then sorted using stack operations only.
+The program receives a sequence of unique integers, stores them in stack A, and prints to standard output the operations needed to sort the values in ascending order. Stack B is used as temporary storage during the sorting process.
 
----
+The goal of the project is not only to sort the numbers correctly, but also to do it using as few operations as possible.
 
-<br>
+This implementation includes:
 
-## Detailed Algorithm Description
-
-### Stack representation
-
-Stacks are represented as doubly linked lists of `t_node` structures. Each node contains:
-
-- `value`: the integer stored in the node
-- `node_position`: its index inside the stack
-- `node_before` / `node_after`: pointers to adjacent nodes
-- `destination`: target node in stack A for a node in stack B
-- `solving_cost`: estimated cost to move the node into position
-- `top_half_flag`: indicates whether the node is in the top half of its stack
-- `next_to_solve`: marks which node in stack B should be moved next
-
-### Operations
-
-All operations update the head pointers of stack A and stack B, and print the corresponding instruction string to standard output. The supported operations are implemented as separate command functions.
-
-### Input parsing and validation
-
-Input is accepted in two forms:
-
-- multiple command-line arguments: `./push_swap 2 1 3`
-- a single quoted string: `./push_swap "2 1 3"`
-
-For the single-string form, `extract_values()` splits the string into separate token strings.
-
-Validation is performed in `create_stack_safely()`:
-
-- `characters_check()` ensures each token contains only digits and an optional leading sign
-- the value is converted with a custom `ft_atod()` and verified to fit in `INT_MIN..INT_MAX`
-- `duplicates_check()` ensures every number is unique
-- valid values are appended to stack A in the original order
-
-If validation fails, the program prints `Error` to standard error and exits.
-
-### Sorting approach
-
-The sorting logic is divided by input size:
-
-- `2` elements: one swap if needed
-- `3` elements: `sort_three()` locates the largest element and rotates or reverses to place it, then swaps if necessary
-- `> 3` elements: `sort_many()` uses a greedy insertion strategy
-
-The general strategy for larger datasets is:
-
-1. Push all but three elements from stack A to stack B using `pb`
-2. Sort the remaining three elements in stack A with `sort_three()`
-3. Reinsert elements from stack B into stack A one by one
-   - `update_nodes()` computes a destination node in A for each B node
-   - each B node is assigned a rotation cost based on its position and its destination position
-   - `next_to_solve` selects the B node with minimal total cost
-   - `solve_node()` rotates A and B so the selected node and its destination reach the top with minimal moves
-   - `pa` pushes the selected node back to stack A
-4. At the end, rotate stack A until the lowest value is on top
-
-This is a cost-driven insertion algorithm rather than a radix or chunk sorting algorithm.
-
-### Handling of small vs large datasets
-
-- For `2` elements: the program calls `swap_a()` directly
-- For `3` elements: the specialized `sort_three()` routine sorts the stack using at most two operations
-- For larger inputs: the algorithm pushes all but three elements to stack B, sorts the remaining three in A, then reinserts B elements based on computed rotation costs
-
----
-
-<br>
+- input parsing for both separated arguments and quoted strings
+- validation for invalid characters, duplicate numbers, and integer overflow
+- linked-list based stack management
+- the full set of allowed `push_swap` operations
+- three sorting strategies
+- an adaptive strategy selector based on input disorder
+- an optional benchmark mode
 
 ## Instructions
 
 ### Compilation
 
-The project is built using the provided `Makefile`. The executable produced is `push_swap`.
-
-Available targets:
-
-- `all`: compile the project and create `push_swap`
-- `norm`: run `norminette -R CheckForbiddenSourceHeader` to check formatting rules
-- `test`: compile with address sanitizer, run `./push_swap` with the `ARG` variable, then validate using an external checker in `../checker_Mac` or `../checker_linux`
-- `valgrind`: compile with debug symbols and run either `leaks` on macOS or `valgrind` on Linux
-- `git`: add, commit, and push repository changes if the working tree is dirty
-- `clean`: remove object files (`*.o`)
-- `fclean`: remove object files and the executable `push_swap`
-- `re`: run `fclean` then `all`
-
-### Build details
-
-- Compiler: `cc`
-- Compiler flags: `-Wall -Wextra -Werror`
-- Debug flags: `-fsanitize=address` (used by `make test`)
-- Object files: generated from every `.c` source file in the repository
-
-### Build commands
+Compile the project with:
 
 ```bash
 make
 ```
 
-or
+This creates the executable:
 
 ```bash
-make all
+push_swap
 ```
 
-To remove all object files:
+The project is compiled with:
 
 ```bash
-make clean
+cc -Wall -Wextra -Werror
 ```
 
-To remove the executable and object files:
+### Makefile targets
 
-```bash
-make fclean
-```
+Available targets:
 
-To rebuild from scratch:
-
-```bash
-make re
-```
-
----
-
-<br>
+- `make`: compiles the project
+- `make all`: compiles the project
+- `make clean`: removes object files
+- `make fclean`: removes object files and the executable
+- `make re`: rebuilds the project from scratch
+- `make norm`: runs Norminette
+- `make test`: compiles with AddressSanitizer and runs a checker if available
+- `make valgrind`: runs memory checks with Valgrind on Linux or leaks on macOS
+- `make gdb`: starts GDB on Linux or LLDB on macOS
 
 ## Usage
 
-Run the program with a list of integer arguments:
+Run the program with a list of integers:
 
 ```bash
-./push_swap 2 1 3 6 5 8
+./push_swap 4 2 1 3
 ```
 
-Or with a single quoted string of values:
+You can also pass the values as a single quoted string:
 
 ```bash
-./push_swap "2 1 3 6 5 8"
+./push_swap "4 2 1 3"
 ```
 
-The program prints a sequence of stack operations to standard output. For example, valid output might include:
+The program prints a sequence of operations:
 
-```bash
+```txt
 pb
 sa
 pa
 ```
 
-This output represents the moves the program uses to sort the input.
+These operations can be passed to a checker program to verify that the stack is correctly sorted.
 
-### Checker program
+### Invalid input
 
-The repository does not include a checker program. The `Makefile` references an external checker in `../checker_Mac` or `../checker_linux` for the `test` target. If you have a compatible checker available outside this repository, use `make test ARG="..."`.
+If the input is invalid, the program prints:
 
----
+```txt
+Error
+```
 
-<br>
+to standard error.
+
+Examples of invalid input:
+
+```bash
+./push_swap 1 2 2
+./push_swap 1 abc 3
+./push_swap 2147483648
+./push_swap --
+```
+
+The program rejects:
+
+- non-numeric values
+- duplicate integers
+- values outside the `int` range
+- malformed signs such as `+` or `-` without digits
+- unknown flags
+
+## Flags
+
+This implementation supports optional flags.
+
+### Strategy flags
+
+```bash
+./push_swap --simple 4 2 1 3
+./push_swap --medium 4 2 1 3
+./push_swap --complex 4 2 1 3
+./push_swap --adaptive 4 2 1 3
+```
+
+Available strategies:
+
+- `--simple`: uses the simple selection-based strategy
+- `--medium`: uses the chunk-based strategy
+- `--complex`: uses binary radix sort
+- `--adaptive`: automatically chooses a strategy based on the disorder of the input
+
+If no strategy flag is provided, the program uses adaptive mode by default.
+
+If multiple strategy flags are provided, the last one is used.
+
+### Benchmark flag
+
+```bash
+./push_swap --bench 4 2 1 3
+```
+
+The `--bench` flag prints benchmark information to standard error, including:
+
+- detected disorder percentage
+- selected strategy
+- estimated complexity
+- total number of operations
+- number of times each operation was used
+
+Example:
+
+```bash
+./push_swap --bench --adaptive 4 2 1 3
+```
+
+will display the following Benchmark mode output
+
+```bash
+[bench] disorder:    66.67%
+[bench] strategy:    Adaptive / O(n log n)
+[bench] total_ops:    12
+[bench] sa:   0   sb:   0   ss:   0   pa:   4   pb:   4
+[bench] ra:   4   rb:   0   rr:   0   rra:   0   rrb:   0   rrr:   0
+```
 
 ## Operations
 
-The following operations are implemented in this project:
+The project implements the complete set of allowed `push_swap` operations.
+
+### Swap
 
 - `sa`: swap the first two elements of stack A
 - `sb`: swap the first two elements of stack B
-- `ss`: perform `sa` and `sb` simultaneously
-- `pa`: push the top element from stack B to stack A
-- `pb`: push the top element from stack A to stack B
+- `ss`: perform `sa` and `sb` at the same time
+
+### Push
+
+- `pa`: push the first element of stack B to stack A
+- `pb`: push the first element of stack A to stack B
+
+### Rotate
+
 - `ra`: rotate stack A upward
 - `rb`: rotate stack B upward
-- `rr`: perform `ra` and `rb` simultaneously
-- `rra`: reverse rotate stack A downward
-- `rrb`: reverse rotate stack B downward
-- `rrr`: perform `rra` and `rrb` simultaneously
+- `rr`: perform `ra` and `rb` at the same time
 
----
+### Reverse rotate
 
-<br>
+- `rra`: rotate stack A downward
+- `rrb`: rotate stack B downward
+- `rrr`: perform `rra` and `rrb` at the same time
+
+## Algorithm Explanation and Justification
+
+This project implements three sorting strategies and one adaptive dispatcher.
+
+The strategies were selected to handle different types of input efficiently. Small or nearly sorted inputs do not need a complex algorithm, while highly disordered inputs benefit from a more predictable sorting method.
+
+### Disorder calculation
+
+Before sorting, the program calculates how disordered the input is.
+
+The disorder value is computed by comparing every pair of values in stack A. If a value appears before a smaller value, that pair is considered to be in the wrong order.
+
+The final disorder score is:
+
+```txt
+wrong_pairs / total_pairs
+```
+
+This produces a value between `0.0` and `1.0`.
+
+- `0.0` means the stack is already sorted
+- values close to `0.0` mean the stack is almost sorted
+- values close to `1.0` mean the stack is highly disordered
+
+This value is used by the adaptive strategy to choose the most appropriate algorithm.
+
+### Simple strategy
+
+The simple strategy is a selection-sort adaptation for two stacks.
+
+It repeatedly:
+
+1. Finds the smallest value in stack A.
+2. Updates node positions.
+3. Rotates or reverse-rotates stack A to bring the smallest value to the top.
+4. Pushes that value to stack B.
+5. Repeats until stack A is empty.
+6. Pushes all values back from stack B to stack A.
+
+Because the smallest values are pushed first to B, pushing everything back to A rebuilds the stack in sorted order.
+
+This strategy is simple and useful for inputs with low disorder, but it becomes expensive for larger or random inputs because it repeatedly scans the stack and may perform many rotations.
+
+Estimated complexity:
+
+```txt
+O(n²)
+```
+
+### Medium strategy
+
+The medium strategy is based on chunks.
+
+First, each node receives a rank called `index`, based on its sorted position. The smallest value receives index `0`, the next smallest receives index `1`, and so on.
+
+Then the algorithm divides the input into approximately `sqrt(n)` chunks.
+
+For each chunk, the program:
+
+1. Searches stack A for values whose indexes belong to the current chunk.
+2. Chooses the closest matching value from either the top or the bottom of stack A.
+3. Rotates stack A using the shortest direction.
+4. Pushes the selected value to stack B.
+5. Rotates stack B when useful to keep larger values easier to retrieve later.
+
+After all chunks have been pushed to stack B, the program rebuilds stack A by repeatedly finding the largest index in B, moving it to the top, and pushing it back to A.
+
+This strategy is a compromise between the simple strategy and radix sort. It reduces unnecessary scans and rotations while keeping the logic relatively easy to control.
+
+Estimated complexity:
+
+```txt
+O(n√n)
+```
+
+### Complex strategy
+
+The complex strategy uses binary radix sort.
+
+Before sorting, all values are compressed into indexes from `0` to `n - 1`. This makes the algorithm independent from the original integer values, including negative numbers and very large or very small valid integers.
+
+The algorithm then sorts the stack bit by bit.
+
+For each bit position:
+
+1. Read the selected bit of the index at the top of stack A.
+2. If the bit is `1`, rotate stack A.
+3. If the bit is `0`, push the element to stack B.
+4. After one full pass through stack A, push everything from B back to A.
+5. Continue with the next bit.
+
+After all necessary bits have been processed, stack A is sorted.
+
+Radix sort was selected for highly disordered inputs because it is predictable, stable for indexed values, and scales better than the simpler strategies.
+
+Estimated complexity:
+
+```txt
+O(n log n)
+```
+
+### Adaptive strategy
+
+The adaptive strategy is the default mode.
+
+It chooses the sorting strategy based on the disorder score:
+
+- disorder `< 0.2`: simple strategy
+- disorder `>= 0.2` and `< 0.5`: medium strategy
+- disorder `>= 0.5`: complex strategy
+
+This makes the program flexible:
+
+- nearly sorted inputs avoid unnecessary heavy sorting
+- moderately mixed inputs use chunk sorting
+- highly disordered inputs use radix sort
+
+The adaptive strategy was chosen to balance operation count, implementation clarity, and behavior across different input patterns.
 
 ## Project Structure
 
-```text
-.
-├── Makefile
-├── README.md
-├── command_push.c
-├── command_reverse.c
-├── command_rotate.c
-├── command_swap.c
-├── create_stack.c
-├── exceptions_handling.c
-├── extract_values.c
-├── push_swap.c
-├── sort_many_nodes.c
-├── sort_three_nodes.c
-├── stack_calculations.c
-└── update_nodes.c
-```
+Main files:
 
----
-
-<br>
-
-## Function Overview
-
-### Parsing and validation
-
-- `extract_values()`: splits a single string argument into tokens
-- `create_stack_safely()`: validates values and builds stack A
-- `characters_check()`: verifies token syntax
-- `duplicates_check()`: ensures values are unique
-- `free_argv_mem()`: frees memory allocated by `extract_values()` when needed
-- `free_and_exit()`: prints `Error` and exits on invalid input
-
-### Stack operations
-
-- `swap_a()`, `swap_b()`, `swap_both()`
-- `push_to_a()`, `push_to_b()`
-- `rotate_a()`, `rotate_b()`, `rotate_both()`
-- `reverse_a()`, `reverse_b()`, `reverse_both()`
-
-### Sorting logic
-
-- `sort_three()`: sorts three values in stack A
-- `sort_many()`: sorts larger inputs by sending elements to stack B and reinserting them
-- `ensure_top()`: brings a node to the top of its stack using rotation direction
-- `push_to_a()`: moves the selected node back to stack A during reinsertion
-
-### Stack utilities
-
-- `get_last_node()`: returns the last node in a stack
-- `get_lowest_value()`: finds the smallest value in a stack
-- `find_next_to_solve()`: locates the best candidate in stack B
-- `get_stack_length()`: counts nodes in a stack
-- `is_sorted()`: checks whether stack A is already sorted
-- `position_update()`: assigns index and half position flags
-- `solving_cost_update()`: computes the rotation cost for each B node
-- `next_to_solve_update()`: selects the B node with minimal cost
-- `update_nodes()`: refreshes stack metadata before each reinsertion
-
----
-
-<br>
+- `push_swap.c`: program entry point and strategy dispatcher
+- `push_swap.h`: shared structures, constants, and function prototypes
+- `create_stack.c`: stack creation and integer conversion
+- `exceptions_handling.c`: input validation and memory cleanup
+- `split_arguments.c`: argument splitting
+- `split_arguments_utils.c`: helper functions for argument splitting
+- `flags_handling.c`: command-line flag parsing
+- `command_swap.c`: swap operations
+- `command_push.c`: push operations
+- `command_rotate.c`: rotate operations
+- `command_reverse.c`: reverse rotate operations
+- `simple_strategy.c`: selection-based sorting strategy
+- `medium_strategy.c`: chunk-based sorting strategy
+- `medium_strategy_utils.c`: helper functions for chunk sorting
+- `complex_strategy.c`: binary radix sorting strategy
+- `compute_disorder.c`: input disorder calculation
+- `stack_calculations.c`: stack utility functions
+- `benchmark_mode.c`: benchmark data management
+- `benchmark_rendering.c`: benchmark output rendering
 
 ## Resources
 
-- 42 subject
-- Algorithm resources on sorting and stack-based sorting
-- C documentation
-- Head First C — David Griffiths & Dawn Griffiths
+Classic references and useful material:
 
----
+- 42 push_swap subject
+- C manual 
+- GNU Make documentation: https://www.gnu.org/software/make/manual/
+- Stack data structure: https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
+- Sorting algorithms: GeeksforGeeks, https://en.wikipedia.org/wiki/Sorting_algorithm
+- Selection sort: GeeksforGeeks, https://en.wikipedia.org/wiki/Selection_sort
+- Radix sort: GeeksforGeeks, https://en.wikipedia.org/wiki/Radix_sort
+- Big O notation: https://en.wikipedia.org/wiki/Big_O_notation
+- Testing sorting algorithms:  https://push-swap42-visualizer.vercel.app
 
-<br>
+## AI Usage Disclosure
 
-## AI usage disclosure
+AI was used to help review the repository structure and write this README.
 
-- AI was NOT used to write the project code
-- AI was used to help generate Doxygen-style documentation comments
-- AI was used to assist in writing this README
-- The README was not generated exclusively by AI
+Specifically, AI was used for:
 
----
+- summarizing the purpose of the project
+- describing the behavior of the implemented source files
+- explaining the selected algorithms
+- testing some functions
+- writing this README according to the required structure
+- improving clarity and readability of the documentation
+- helping installing some development tools like Norminette for code style compliance check
 
-*Last updated: May 2026*
+AI was not used as the source of the project logic itself. The algorithm descriptions in this README are based on the actual implementation found in the repository.

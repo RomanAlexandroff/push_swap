@@ -1,11 +1,13 @@
 
 NAME = push_swap
 
-SRCS = push_swap.c command_push.c command_reverse.c\
-		command_rotate.c command_swap.c create_stack.c\
-		exceptions_handling.c extract_values.c\
-		sort_many_nodes.c sort_three_nodes.c\
-		stack_calculations.c update_nodes.c
+SRCS = push_swap.c benchmark_mode.c command_push.c command_reverse.c\
+		command_rotate.c command_swap.c compute_disorder.c create_stack.c\
+		exceptions_handling.c flags_handling.c medium_strategy.c\
+		simple_strategy.c complex_strategy.c benchmark_rendering.c\
+		split_arguments.c stack_calculations.c medium_strategy_utils.c\
+		split_arguments_utils.c
+		
 OBJS = $(SRCS:.c=.o)
 
 ARG ?= "4 67 3 87 23 -234"
@@ -32,7 +34,7 @@ norm:
 	@norminette -R CheckForbiddenSourceHeader || true
 	@echo "\n\n========= THE RESULTS END HERE =========\n\n"
 
-#change ARG by running like this: make test ARG="1 2 3" 
+# change ARG by running like this: make test ARG="1 2 3" 
 test:
 	$(CC) $(SRCS) $(CFLAGS) $(DEBUG_FLAGS) -o $(NAME)
 	@echo "Push_swap has been compiled."
@@ -42,30 +44,30 @@ test:
 	@echo "\nRunning Checker:"
 # use chmode on the program file if it fails to run
 ifeq ($(UNAME),Darwin)
-	@./$(NAME) $(ARG) | ../checker_Mac $(ARG)
+	@./$(NAME) --medium $(ARG) | ../checker_Mac $(ARG)
 else
-	@./$(NAME) $(ARG) | ../checker_linux $(ARG)
+	@./$(NAME) --medium $(ARG) | ../checker_linux $(ARG)
 endif
 	@$(RM) $(NAME)
 	@echo "\nTest is concluded.\n"
 
-#this rule calls Valgrind or Leaks depending on the OS
+# this rule calls Valgrind or Leaks depending on the OS
 valgrind:
 ifeq ($(UNAME),Darwin)
 	@echo "Using Leaks for memory checking."
 	@$(CC) $(CFLAGS) $(SRCS) -g -o $(NAME)
-	@leaks --atExit -- ./$(NAME) $(ARG)
+	@leaks --atExit -- ./$(NAME) $(ARG) --bench --medium
 	@$(RM) $(NAME)
 	@$(RM) -r $(NAME).dSYM
 else
 	@echo "Using Valgrind for memory checking."
 	@$(CC) $(CFLAGS) $(SRCS) -g -o $(NAME)
 	@valgrind --leak-check=full --show-leak-kinds=all \
-		--track-origins=yes --track-fds=yes --verbose ./$(NAME) $(ARG)
+		--track-origins=yes --track-fds=yes --verbose ./$(NAME) --simple --bench $(ARG)
 	@$(RM) $(NAME)
 endif
 
-#calls GDB or LLDB depending on the detected OS
+# calls GDB or LLDB depending on the detected OS
 gdb:
 ifeq ($(UNAME),Darwin)
 	@echo "Using LLDB."
@@ -80,6 +82,7 @@ else
 	@$(RM) $(NAME)
 endif
 
+# performs "git add + commit + push" of the branch you're CURRENTLY on
 git:
 	@if [ -n "$$(git status --porcelain)" ]; then \
 		echo "The following changes will be added + commited + pushed"; \
@@ -109,4 +112,4 @@ fclean : clean
 re : fclean all
 	@echo "Rebuilding the project is complete."
 
-.PHONY: all norm test valgrind gdb git clean fclean re
+.PHONY: all norm test valgrind gdb git update clean fclean re

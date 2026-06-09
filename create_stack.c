@@ -3,16 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   create_stack.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42roma.it>      #+#  +:+       +#+        */
+/*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-13 13:32:41 by roaleksa          #+#    #+#             */
-/*   Updated: 2026-03-13 13:32:41 by roaleksa         ###   ########.fr       */
+/*   Created: 2026/03/13 13:32:41 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/06/08 13:24:39 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	add_new_node(t_node **stack, int value)
+/*
+	Dynamically allocates memory for a new
+	node in the list, sets default values,
+	inserts the new node into the doubly
+	linked list. Returns 1 on success, else 0.
+*/
+static int	add_new_node(t_node **stack, int value, t_bench *bench)
 {
 	t_node	*new_node;
 	t_node	*last_node;
@@ -24,6 +30,7 @@ static int	add_new_node(t_node **stack, int value)
 		return (0);
 	new_node->node_after = NULL;
 	new_node->value = value;
+	new_node->bench = bench;
 	if (*stack == NULL)
 	{
 		*stack = new_node;
@@ -67,26 +74,30 @@ static long	ft_atod(const char *str)
 	return (sign * output);
 }
 
-void	create_stack_safely(t_node **a, char **argv, int argc)
+/*
+ *	Can skip strings which start with "--"
+ *	in order not to parse flags by accident
+*/
+void	create_stack_safely(t_node **a, char **argv, t_bench *bench)
 {
 	long	value;
 	int		i;
 
 	value = 0;
-	i = 0;
-	while (argv[i])
+	i = -1;
+	while (argv[++i] != NULL)
 	{
+		if (argv[i][0] == '-' && argv[i][1] == '-')
+			continue ;
 		if (!characters_check(argv[i]))
-			free_and_exit(a, argv, argc);
+			free_and_exit(a, argv);
 		value = ft_atod(argv[i]);
 		if (value < INT_MIN || value > INT_MAX)
-			free_and_exit(a, argv, argc);
+			free_and_exit(a, argv);
 		if (!duplicates_check(*a, (int)value))
-			free_and_exit(a, argv, argc);
-		if (!add_new_node(a, (int)value))
-			free_and_exit(a, argv, argc);
-		i++;
+			free_and_exit(a, argv);
+		if (!add_new_node(a, (int)value, bench))
+			free_and_exit(a, argv);
 	}
-	if (argc == 2)
-		free_argv_mem(argv);
+	free_argv_mem(argv);
 }

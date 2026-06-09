@@ -41,23 +41,6 @@ t_node	*get_lowest_value(t_node *stack)
 	return (smallest_node);
 }
 
-/*
- * Next node to solve is the node from stack B with
- * the least amount of steps to sort into stack A
-*/
-t_node	*find_next_to_solve(t_node *stack)
-{
-	if (stack == NULL)
-		return (NULL);
-	while (stack)
-	{
-		if (stack->next_to_solve)
-			return (stack);
-		stack = stack->node_after;
-	}
-	return (NULL);
-}
-
 int	get_stack_length(t_node *stack)
 {
 	int	count;
@@ -84,4 +67,33 @@ bool	is_sorted(t_node *stack)
 		stack = stack->node_after;
 	}
 	return (true);
+}
+
+/*
+	Computes integer square root of num.
+*/
+int	ft_sqrt(int num)
+{
+	int	low;
+	int	high;
+	int	middle;
+	int	result;
+
+	if (num <= 0)
+		return (0);
+	low = 1;
+	high = num;
+	result = 1;
+	while (low <= high)
+	{
+		middle = (low + high) / 2;
+		if ((long)middle * middle <= num)
+		{
+			result = middle;
+			low = middle + 1;
+		}
+		else
+			high = middle - 1;
+	}
+	return (result);
 }

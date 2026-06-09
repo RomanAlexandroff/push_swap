@@ -50,12 +50,12 @@ void	free_argv_mem(char **argv)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	if (argv == NULL || *argv == NULL)
 		return ;
 	while (argv[i])
 		free(argv[i++]);
-	free(argv - 1);
+	free(argv);
 }
 
 void	free_stack_mem(t_node **stack)
@@ -75,11 +75,10 @@ void	free_stack_mem(t_node **stack)
 	*stack = NULL;
 }
 
-void	free_and_exit(t_node **a, char **argv, int argc)
+void	free_and_exit(t_node **a, char **argv)
 {
 	free_stack_mem(a);
-	if (argc == 2)
-		free_argv_mem(argv);
-	write(2, "Error\n", 6);
+	free_argv_mem(argv);
+	write(FD_STDERR, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }

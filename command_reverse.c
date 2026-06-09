@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_reverse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42roma.it>      #+#  +:+       +#+        */
+/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-13 13:32:23 by roaleksa          #+#    #+#             */
-/*   Updated: 2026-03-13 13:32:23 by roaleksa         ###   ########.fr       */
+/*   Created: 2026/03/13 13:32:23 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/06/05 14:54:44 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,24 @@ static void	reverse(t_node **stack)
 void	reverse_a(t_node **a)
 {
 	reverse(a);
-	write(1, "rra\n", 4);
+	if (*a && (*a)->bench)
+		(*a)->bench->rra++;
+	write(FD_STDOUT, "rra\n", 4);
 }
 
 void	reverse_b(t_node **b)
 {
 	reverse(b);
-	write(1, "rrb\n", 4);
+	if (*b && (*b)->bench)
+		(*b)->bench->rrb++;
+	write(FD_STDOUT, "rrb\n", 4);
 }
 
 void	reverse_both(t_node **a, t_node **b)
 {
 	reverse(a);
 	reverse(b);
-	write(1, "rrr\n", 4);
+	if (*a && (*a)->bench)
+		(*a)->bench->rrr++;
+	write(FD_STDOUT, "rrr\n", 4);
 }

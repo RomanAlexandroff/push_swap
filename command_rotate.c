@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42roma.it>      #+#  +:+       +#+        */
+/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-03-13 13:32:31 by roaleksa          #+#    #+#             */
-/*   Updated: 2026-03-13 13:32:31 by roaleksa         ###   ########.fr       */
+/*   Created: 2026/03/13 13:32:31 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/06/05 14:55:18 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,24 @@ static void	rotate(t_node **stack)
 void	rotate_a(t_node **a)
 {
 	rotate(a);
-	write(1, "ra\n", 3);
+	if (*a && (*a)->bench)
+		(*a)->bench->ra++;
+	write(FD_STDOUT, "ra\n", 3);
 }
 
 void	rotate_b(t_node **b)
 {
 	rotate(b);
-	write(1, "rb\n", 3);
+	if (*b && (*b)->bench)
+		(*b)->bench->rb++;
+	write(FD_STDOUT, "rb\n", 3);
 }
 
 void	rotate_both(t_node **a, t_node **b)
 {
 	rotate(a);
 	rotate(b);
-	write(1, "rr\n", 3);
+	if (*a && (*a)->bench)
+		(*a)->bench->rr++;
+	write(FD_STDOUT, "rr\n", 3);
 }
