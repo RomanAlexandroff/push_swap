@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 13:34:58 by ccrucian          #+#    #+#             */
-/*   Updated: 2026/06/08 17:24:29 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/10 11:03:31 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	find_arguments(char **argv, int argc)
 	j = 0;
 	while (j < argc)
 	{
+		if (!argv[j])
+			return (0);
 		args_count += count_arguments(argv[j]);
 		j++;
 	}
