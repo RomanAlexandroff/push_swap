@@ -6,7 +6,7 @@
 /*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 11:48:49 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/10 12:09:57 by roaleksa         ###   ########.fr       */
+/*   Updated: 2026/06/10 14:05:25 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,6 @@ static void	destination_update(t_node *a, t_node *b)
 		else
 			b->destination = destination;
 		b = b->node_after;
-	}
-}
-
-static void	position_update(t_node *stack)
-{
-	int	i;
-	int	centerline;
-
-	i = 0;
-    centerline = 0;
-	if (stack == NULL)
-		return ;
-	centerline = get_stack_length(stack) / 2;
-	while (stack)
-	{
-		stack->node_position = i;
-		if (i <= centerline)
-			stack->top_half_flag = true;
-		else
-			stack->top_half_flag = false;
-		stack = stack->node_after;
-		++i;
 	}
 }
 

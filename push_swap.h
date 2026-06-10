@@ -6,7 +6,7 @@
 /*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:08 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/10 12:09:12 by roaleksa         ###   ########.fr       */
+/*   Updated: 2026/06/10 14:05:04 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	sort_five(t_node **a, t_node **b);
 float	compute_disorder(t_node *a, int nodes_count);
 int		get_stack_length(t_node *stack);
 bool	is_sorted(t_node *stack);
+void	position_update(t_node *stack);
 void	move_to_top_a(t_node **a, int pos);
 void	move_to_top_b(t_node **b, int pos);
 void	push_chunk(t_node **a, t_node **b, int min, int max);

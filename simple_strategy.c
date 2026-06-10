@@ -6,13 +6,13 @@
 /*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 17:17:44 by ccrucian          #+#    #+#             */
-/*   Updated: 2026/06/10 11:48:13 by roaleksa         ###   ########.fr       */
+/*   Updated: 2026/06/10 14:04:01 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	position_update(t_node *stack)
+void	position_update(t_node *stack)
 {
 	int	i;
 	int	centerline;

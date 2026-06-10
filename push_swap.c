@@ -6,7 +6,7 @@
 /*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:00 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/10 12:25:19 by roaleksa         ###   ########.fr       */
+/*   Updated: 2026/06/10 14:33:10 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 	set_benchmark(a, SKIP_STRATEGY, SKIP_COMPLEXITY, disorder);
 	if (is_sorted(*a))
 		return ;
-	if (size == 3)
-	{
-		sort_three(a);
-		return ;
-	}
-	if (size == 5)
-	{
-		sort_five(a, b);
-		return ;
-	}
+	// if (size == 3)
+	// {
+	// 	sort_three(a);
+	// 	return ;
+	// }
+	// if (size == 5)
+	// {
+	// 	sort_five(a, b);
+	// 	return ;
+	// }
 	if (mode == SIMPLE_MODE)
 		simple_strategy(a, b);
 	else if (mode == MEDIUM_MODE)
