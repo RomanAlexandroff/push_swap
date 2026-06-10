@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:08 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/08 14:55:23 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/10 12:09:12 by roaleksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ typedef struct s_node
 	int				index;
 	struct s_node	*node_before;
 	struct s_node	*node_after;
+	struct s_node	*destination;
 	bool			top_half_flag;
+	int	    		solving_cost;
+	bool			next_to_solve;
 	t_bench			*bench;
 }				t_node;
 
@@ -79,6 +82,8 @@ void	adaptive_strategy(t_node **a, t_node **b, int size, float disorder);
 void	simple_strategy(t_node **a, t_node **b);
 void	medium_strategy(t_node **a, t_node **b, int size);
 void	complex_strategy(t_node **a, t_node **b);
+void	sort_three(t_node **a);
+void	sort_five(t_node **a, t_node **b);
 
 /* Sorting Helper Functions */
 float	compute_disorder(t_node *a, int nodes_count);
@@ -90,6 +95,7 @@ void	push_chunk(t_node **a, t_node **b, int min, int max);
 t_node	*get_last_node(t_node *node);
 t_node	*get_lowest_value(t_node *stack);
 int		ft_sqrt(int num);
+void	update_nodes(t_node *a, t_node *b);
 
 /* Stack Sorting Orepations */
 void	push_to_a(t_node **a, t_node **b);
