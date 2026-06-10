@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:00 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/08 14:54:35 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/10 11:28:09 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 		- frees allocated resources and exits.
  	On any earlier failure, handles cleanup and exits.
  */
-
 int	main(int argc, char **argv)
 {
 	t_node	*a;
