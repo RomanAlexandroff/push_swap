@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:08 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/10 14:05:04 by roaleksa         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:25:30 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void	push_chunk(t_node **a, t_node **b, int min, int max);
 t_node	*get_last_node(t_node *node);
 t_node	*get_lowest_value(t_node *stack);
 int		ft_sqrt(int num);
-void	update_nodes(t_node *a, t_node *b);
 
 /* Stack Sorting Orepations */
 void	push_to_a(t_node **a, t_node **b);

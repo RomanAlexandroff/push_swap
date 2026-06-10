@@ -1,32 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_five_nodes.c                                  :+:      :+:    :+:   */
+/*   sort_three_nodes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/10 11:42:08 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/10 14:09:45 by roaleksa         ###   ########.fr       */
+/*   Created: 2026/06/10 11:42:21 by roaleksa          #+#    #+#             */
+/*   Updated: 2026/06/10 15:16:09 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /*
- * Next node to solve is the node from stack B with
- * the least amount of steps to sort into stack A
+ * Finds node with the largest value
 */
-static t_node	*find_next_to_solve(t_node *stack)
+static t_node	*get_largest_node(t_node *stack)
 {
-	if (stack == NULL)
+	int		largest_value;
+	t_node	*largest_node;
+
+	largest_value = INT_MIN;
+    if (stack == NULL)
 		return (NULL);
 	while (stack)
 	{
-		if (stack->next_to_solve)
-			return (stack);
+		if (stack->value > largest_value)
+		{
+			largest_value = stack->value;
+			largest_node = stack;
+		}
 		stack = stack->node_after;
 	}
-	return (NULL);
+	return (largest_node);
+}
+
+void	sort_three(t_node **a)
+{
+	t_node	*largest_node;
+
+	largest_node = get_largest_node(*a);
+	if (*a == largest_node)
+		rotate_a(a);
+	else if ((*a)->node_after == largest_node)
+		reverse_a(a);
+	if ((*a)->value > (*a)->node_after->value)
+		swap_a(a);
 }
 
 static void	ensure_top(t_node **stack, t_node *node, char name)
@@ -50,52 +69,20 @@ static void	ensure_top(t_node **stack, t_node *node, char name)
 	}
 }
 
-static void	solve_node(t_node **a, t_node **b)
-{
-	t_node	*node;
-
-	node = find_next_to_solve(*b);
-	if (node->top_half_flag && node->destination->top_half_flag)
-    {
-	    while (*a != node->destination && *b != node)
-		    rotate_both(a, b);
-	    position_update(*a);
-	    position_update(*b);
-    }
-	else if (!(node->top_half_flag) && !(node->destination->top_half_flag))
-    {
-	    while (*a != node->destination && *b != node)
-		    reverse_both(a, b);
-	    position_update(*a);
-	    position_update(*b);
-    }
-	ensure_top(b, node, 'b');
-	ensure_top(a, node->destination, 'a');
-	push_to_a(a, b);
-}
-
 void	sort_five(t_node **a, t_node **b)
 {
-    t_node	*smallest_node;
+	t_node *smallest_node;
+	int		i;
 
-	while (get_stack_length(*a) > 3)
+	i = 0;
+	while (i++ != 2)
 	{
-		update_nodes(*a, *b);
-		ensure_top(a, get_lowest_value(*a), 'a');
+		smallest_node = get_lowest_value(*a);
+		position_update(*a);
+		ensure_top(a, smallest_node, 'a');
 		push_to_b(a, b);
 	}
 	sort_three(a);
 	while (*b)
-	{
-		update_nodes(*a, *b);
-		solve_node(a, b);
-	}
-	position_update(*a);
-	smallest_node = get_lowest_value(*a);
-	if (smallest_node->top_half_flag)
-		while (*a != smallest_node)
-			rotate_a(a);
-	else
-		while (*a != smallest_node)
-			reverse_a(a);
+		push_to_a(a, b);
 }

@@ -6,8 +6,7 @@ SRCS = push_swap.c benchmark_mode.c command_push.c command_reverse.c\
 		exceptions_handling.c flags_handling.c medium_strategy.c\
 		simple_strategy.c complex_strategy.c benchmark_rendering.c\
 		split_arguments.c stack_calculations.c medium_strategy_utils.c\
-		split_arguments_utils.c sort_five_nodes.c sort_three_nodes.c\
-		update_nodes.c
+		split_arguments_utils.c sort_five_nodes.c\
 		
 OBJS = $(SRCS:.c=.o)
 
