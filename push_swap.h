@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:08 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/10 15:25:30 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:42:12 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ typedef struct s_node
 	struct s_node	*node_after;
 	struct s_node	*destination;
 	bool			top_half_flag;
-	int	    		solving_cost;
 	bool			next_to_solve;
 	t_bench			*bench;
 }				t_node;
@@ -82,6 +81,7 @@ void	adaptive_strategy(t_node **a, t_node **b, int size, float disorder);
 void	simple_strategy(t_node **a, t_node **b);
 void	medium_strategy(t_node **a, t_node **b, int size);
 void	complex_strategy(t_node **a, t_node **b);
+int		small_sort(t_node **a, t_node **b, int size);
 void	sort_three(t_node **a);
 void	sort_five(t_node **a, t_node **b);
 

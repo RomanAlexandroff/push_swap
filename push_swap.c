@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:00 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/10 15:11:01 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:43:08 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,6 @@ static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 	set_benchmark(a, SKIP_STRATEGY, SKIP_COMPLEXITY, disorder);
 	if (is_sorted(*a))
 		return ;
-	if (size == 3)
-	{
-		sort_three(a);
-		return ;
-	}
-	if (size == 5)
-	{
-		sort_five(a, b);
-		return ;
-	}
 	if (mode == SIMPLE_MODE)
 		simple_strategy(a, b);
 	else if (mode == MEDIUM_MODE)
@@ -67,6 +57,21 @@ static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 		complex_strategy(a, b);
 	else
 		adaptive_strategy(a, b, size, disorder);
+}
+
+int	small_sort(t_node **a, t_node **b, int size)
+{
+	if (size == 3)
+	{
+		sort_three(a);
+		return (1);
+	}
+	if (size == 5)
+	{
+		sort_five(a, b);
+		return (1);
+	}
+	return (0);
 }
 
 /*

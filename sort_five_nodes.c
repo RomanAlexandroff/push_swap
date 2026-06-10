@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_three_nodes.c                                 :+:      :+:    :+:   */
+/*   sort_five_nodes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 11:42:21 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/10 15:16:09 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:31:32 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_node	*get_largest_node(t_node *stack)
 	t_node	*largest_node;
 
 	largest_value = INT_MIN;
-    if (stack == NULL)
+	if (stack == NULL)
 		return (NULL);
 	while (stack)
 	{
@@ -65,13 +65,13 @@ static void	ensure_top(t_node **stack, t_node *node, char name)
 				rotate_b(stack);
 			else
 				reverse_b(stack);
-		}	
+		}
 	}
 }
 
 void	sort_five(t_node **a, t_node **b)
 {
-	t_node *smallest_node;
+	t_node	*smallest_node;
 	int		i;
 
 	i = 0;

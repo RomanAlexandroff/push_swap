@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_strategy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaleksa <roaleksa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 17:17:44 by ccrucian          #+#    #+#             */
-/*   Updated: 2026/06/10 14:04:01 by roaleksa         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:40:51 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	simple_strategy(t_node **a, t_node **b)
 	t_node	*smallest_node;
 
 	set_benchmark(a, "Simple", "O(n2)", SKIP_DISORDER);
+	if (small_sort(a, b, get_stack_length(*a)))
+		return ;
 	while (*a)
 	{
 		smallest_node = get_lowest_value(*a);
