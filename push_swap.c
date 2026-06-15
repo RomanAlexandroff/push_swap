@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:00 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/08 14:54:35 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:43:08 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,21 @@ static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 		adaptive_strategy(a, b, size, disorder);
 }
 
+int	small_sort(t_node **a, t_node **b, int size)
+{
+	if (size == 3)
+	{
+		sort_three(a);
+		return (1);
+	}
+	if (size == 5)
+	{
+		sort_five(a, b);
+		return (1);
+	}
+	return (0);
+}
+
 /*
 	Program entry point. Orchestrates the full lifecycle:
 		- immediately rejects empty input,
@@ -71,7 +86,6 @@ static void	mode_dispatcher(t_mode mode, t_node **a, t_node **b)
 		- frees allocated resources and exits.
  	On any earlier failure, handles cleanup and exits.
  */
-
 int	main(int argc, char **argv)
 {
 	t_node	*a;

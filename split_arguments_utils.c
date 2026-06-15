@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 13:34:58 by ccrucian          #+#    #+#             */
-/*   Updated: 2026/06/08 17:24:29 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/10 11:25:21 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	count_arguments(char *argv)
  *	Counts the number of arguments in an array of strings
  *	no matter if arguments are located in their individual
  *	strings, or in one common string, or in a mix of
- *	individual and common strings.
+ *	individual and common strings. Outputs Error and exits
+ *	if encounters an empty argument.
 */
 int	find_arguments(char **argv, int argc)
 {
@@ -53,6 +54,8 @@ int	find_arguments(char **argv, int argc)
 	j = 0;
 	while (j < argc)
 	{
+		if (argv[j][0] == '\0')
+			free_and_exit(NULL, NULL);
 		args_count += count_arguments(argv[j]);
 		j++;
 	}

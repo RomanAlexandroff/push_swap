@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 16:00:07 by ccrucian          #+#    #+#             */
-/*   Updated: 2026/06/08 13:43:21 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:45:04 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,12 @@ void	complex_strategy(t_node **a, t_node **b)
 
 	set_benchmark(a, "Complex", "O(n log n)", SKIP_DISORDER);
 	length = get_stack_length(*a);
+	if (small_sort(a, b, length))
+		return ;
 	assign_index(*a);
 	max_bits = get_max_bits(*a);
-	bit_read = 0;
-	while (bit_read < max_bits)
+	bit_read = -1;
+	while (++bit_read < max_bits)
 	{
 		i = length;
 		while (i--)
@@ -91,6 +93,5 @@ void	complex_strategy(t_node **a, t_node **b)
 		}
 		while (*b)
 			push_to_a(a, b);
-		bit_read++;
 	}
 }
