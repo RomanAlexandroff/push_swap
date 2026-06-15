@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 10:26:04 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/08 14:56:57 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:41:07 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ void	medium_strategy(t_node **a, t_node **b, int size)
 	int	end;
 
 	set_benchmark(a, "Medium", "O(n√n)", SKIP_DISORDER);
+	if (small_sort(a, b, get_stack_length(*a)))
+		return ;
 	assign_sorting_rank(*a);
 	chunk_count = ft_sqrt(size);
 	if (chunk_count == 0)

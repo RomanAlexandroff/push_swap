@@ -6,7 +6,7 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:33:08 by roaleksa          #+#    #+#             */
-/*   Updated: 2026/06/08 14:55:23 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:42:12 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ typedef struct s_node
 	int				index;
 	struct s_node	*node_before;
 	struct s_node	*node_after;
+	struct s_node	*destination;
 	bool			top_half_flag;
+	bool			next_to_solve;
 	t_bench			*bench;
 }				t_node;
 
@@ -79,11 +81,15 @@ void	adaptive_strategy(t_node **a, t_node **b, int size, float disorder);
 void	simple_strategy(t_node **a, t_node **b);
 void	medium_strategy(t_node **a, t_node **b, int size);
 void	complex_strategy(t_node **a, t_node **b);
+int		small_sort(t_node **a, t_node **b, int size);
+void	sort_three(t_node **a);
+void	sort_five(t_node **a, t_node **b);
 
 /* Sorting Helper Functions */
 float	compute_disorder(t_node *a, int nodes_count);
 int		get_stack_length(t_node *stack);
 bool	is_sorted(t_node *stack);
+void	position_update(t_node *stack);
 void	move_to_top_a(t_node **a, int pos);
 void	move_to_top_b(t_node **b, int pos);
 void	push_chunk(t_node **a, t_node **b, int min, int max);

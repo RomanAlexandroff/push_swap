@@ -9,3 +9,5 @@
 ~$sh-Swap Workflow.docx
 .vscode
 checker*
+ft_ps_tester/
+*.swp

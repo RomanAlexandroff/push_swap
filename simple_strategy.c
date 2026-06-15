@@ -6,13 +6,13 @@
 /*   By: ccrucian <ccrucian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 17:17:44 by ccrucian          #+#    #+#             */
-/*   Updated: 2026/06/08 13:27:59 by ccrucian         ###   ########.fr       */
+/*   Updated: 2026/06/10 15:40:51 by ccrucian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	position_update(t_node *stack)
+void	position_update(t_node *stack)
 {
 	int	i;
 	int	centerline;
@@ -46,6 +46,8 @@ void	simple_strategy(t_node **a, t_node **b)
 	t_node	*smallest_node;
 
 	set_benchmark(a, "Simple", "O(n2)", SKIP_DISORDER);
+	if (small_sort(a, b, get_stack_length(*a)))
+		return ;
 	while (*a)
 	{
 		smallest_node = get_lowest_value(*a);
