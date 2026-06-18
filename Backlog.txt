@@ -1,0 +1,72 @@
+
+PUSH-SWAP PROJECT BACKLOG
+================================================================
+
+TASKS
+
+
+###0 — User arguments verification and parsing — Roman
+
+
+###1 — Strategy selection flags — Roman
+* --simple
+* --medium
+* --complex
+* --adaptive
+* --bench (flag only)
+Requirements:
+* Default strategy must be adaptive when no selector is provided.
+* Parse strategy selection flags from argv.
+
+
+###2 — Simple sorting algorithm — Carlotta
+* Implement separate simple O(n²) sorting strategy.
+
+
+###3 — Medium sorting algorithm — Roman
+* Implement separate medium O(n√n) sorting strategy.
+
+
+###4 — Complex sorting algorithm — Carlotta
+* Implement separate complex O(n log n) sorting strategy.
+
+
+###5 — Adaptive sorting algorithm and disorder metric — Carlotta
+* Implement disorder calculation:
+  	disorder = mistakes / total_pairs
+* Measure disorder before any moves.
+* Select strategy based on disorder.
+
+
+###6 — Benchmark mode — Roman
+Benchmark output to stderr must include:
+* Computed disorder
+* Strategy name
+* Complexity class
+* Total operation count
+* Count of each operation:
+  	sa, sb, ss,
+  	pa, pb,
+  	ra, rb, rr,
+  	rra, rrb, rrr
+Requirements:
+* Strategy name available in benchmark mode.
+* Complexity class available in benchmark mode.
+* Separate task from implementing the --bench flag.
+
+
+###7 — Write README — Carlotta
+Missing documentation:
+* Contributors and logins
+* Contribution breakdown
+* Adaptive disorder thresholds
+* Rationale behind thresholds
+* Complexity upper bounds for:
+  	* Low disorder
+  	* Medium disorder
+  	* High disorder
+
+
+###8 — Code base Norminette compliance — Carlotta
+* Make the program code compliant with the Norm code style.
+

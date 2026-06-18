@@ -1,6 +1,5 @@
 .DS_Store
 *.pdf
-*.txt
 *.o
 *.out
 *.exe

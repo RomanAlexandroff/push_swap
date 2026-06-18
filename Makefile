@@ -1,13 +1,16 @@
 
 NAME = push_swap
 
-SRCS = push_swap.c benchmark_mode.c command_push.c command_reverse.c\
-		command_rotate.c command_swap.c compute_disorder.c create_stack.c\
-		exceptions_handling.c flags_handling.c medium_strategy.c\
-		simple_strategy.c complex_strategy.c benchmark_rendering.c\
-		split_arguments.c stack_calculations.c medium_strategy_utils.c\
-		split_arguments_utils.c small_sort.c
-		
+SRCS = src/push_swap.c src/benchmark_mode/benchmark_mode.c src/benchmark_mode/benchmark_rendering.c\
+		src/operations_commands/command_push.c src/operations_commands/command_reverse.c\
+		src/operations_commands/command_rotate.c src/operations_commands/command_swap.c\
+		src/sorting_strategies/simple_strategy.c src/sorting_strategies/small_sort.c\
+		src/sorting_strategies/medium_strategy.c src/sorting_strategies/medium_strategy_utils.c\
+		src/sorting_strategies/complex_strategy.c src/user_input_parsing/create_stack.c\
+		src/user_input_parsing/flags_handling.c src/user_input_parsing/split_arguments.c\
+		src/user_input_parsing/split_arguments_utils.c src/utilities/compute_disorder.c\
+		src/utilities/exceptions_handling.c src/utilities/stack_calculations.c
+
 OBJS = $(SRCS:.c=.o)
 
 ARG ?= "4 67 3 87 23 -234"

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
-/*									      */
-/*							  :::	   ::::::::   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
 /*   compute_disorder.c                                 :+:      :+:    :+:   */
-/*						      +:+ +:+	      +:+     */
-/*   By: ccrucian <ccrucian@student.42.fr>	    +#+  +:+	   +#+	      */
-/*						  +#+#+#+#+#+	+#+	      */
-/*   Created: 2026/05/28 14:53:59 by ccrucian	       #+#    #+#	      */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccrucian <ccrucian@student.42.fr>.         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/28 14:53:59 by ccrucian          #+#    #+#             */
 /*   Updated: 2026/05/28 15:09:21 by ccrucian         ###   ########.fr       */
-/*									      */
+/*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 /* 
  * Computes how many pairs of nodes are in the wrong order.
